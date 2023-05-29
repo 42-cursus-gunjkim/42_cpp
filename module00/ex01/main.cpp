@@ -7,27 +7,23 @@ int main()
 
 	while (1)
 	{
-		std::cout << "Enter command: ";
-		std::cin >> command;
-		if (command == "EXIT")
-			break;
-		else if (command == "ADD")
-		{
-			std::string firstName;
-			std::string lastName;
-			std::string nickName;
-
-			std::cout << "Enter first name: ";
-			std::cin >> firstName;
-			std::cout << "Enter last name: ";
-			std::cin >> lastName;
-			std::cout << "Enter nickname: ";
-			std::cin >> nickName;
-			pb.addContact(firstName, lastName, nickName);
-		}
-		else if (command == "SEARCH")
-			pb.searchContact();
-		else
-			std::cout << "Invalid command" << std::endl;
+    	std::cout << "Enter command: ";
+    	std::getline(std::cin, command);
+		if (std::cin.eof())
+        {
+            std::cout << "EOF reached. Exiting program." << std::endl;
+            break;
+        }
+    	if (command == "EXIT")
+        	break;
+    	else if (command == "ADD")
+        	pb.addContact();
+    	else if (command == "SEARCH")
+        	pb.searchContact();
+    	else
+    	{
+        	std::cout << "Invalid command" << std::endl;
+        	continue;
+    	}
 	}
 }

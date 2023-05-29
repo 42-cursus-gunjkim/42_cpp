@@ -1,12 +1,11 @@
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook() : nbContacts(0), lastContactIdx(-1) {}
+PhoneBook::PhoneBook() : lastContactIdx(-1), nbContacts(0) {}
 
 PhoneBook::~PhoneBook() {}
 
 PhoneBook::PhoneBook(PhoneBook &pb)
 {
-	nbContacts = pb.nbContacts;
 	lastContactIdx = pb.lastContactIdx;
 	for (int i = 0; i < 8; i++)
 		contacts[i] = pb.contacts[i];
@@ -14,59 +13,78 @@ PhoneBook::PhoneBook(PhoneBook &pb)
 
 PhoneBook &PhoneBook::operator=(PhoneBook &pb)
 {
-	nbContacts = pb.nbContacts;
 	lastContactIdx = pb.lastContactIdx;
 	for (int i = 0; i < 8; i++)
 		contacts[i] = pb.contacts[i];
 	return *this;
 }
 
-void PhoneBook::addContact(std::string firstName, std::string secondName, std::string nickName)
+void PhoneBook::addContact()
 {
-	if (nbContacts < 8)
-	{
-		nbContacts++;
-		lastContactIdx++;
-		contacts[lastContactIdx].setContact(firstName, secondName, nickName);
-	}
-	else
-		contacts[lastContactIdx].setContact(firstName, secondName, nickName);
+	int	targetIdx = (lastContactIdx + 1) % 8;
+	lastContactIdx = targetIdx;
+	std::string input;
+
+	std::cout << "Enter first name : ";
+	std::cin >> input;
+	contacts[targetIdx].setFirstName(input);
+	std::cout << "Enter second name : ";
+	std::cin >> input;
+	contacts[targetIdx].setLastName(input);
+	std::cout << "Enter nickname : ";
+	std::cin >> input;
+	contacts[targetIdx].setNickName(input);
+	std::cout << "Enter phone number : ";
+	std::cin >> input;
+	contacts[targetIdx].setPhoneNumber(input);
+	std::cout << "Enter darkest secret : ";
+	std::cin >> input;
+	contacts[targetIdx].setDarkestSecret(input);
+	std::cout << "Succefully Added!" << std::endl;
+	nbContacts++;
 }
 
 void PhoneBook::searchContact()
 {
-	for (int i = 0; i < nbContacts; i++)
-		printContact(i);
+    int target;
 
-	int idx;
-	std::cout << "Enter index of contact to display: ";
-	std::cin >> idx;
-	if (idx >= 0 && idx < nbContacts)
-		printContact(idx);
-	else
-		std::cout << "Invalid index" << std::endl;
+    if (nbContacts == 0)
+    {
+        std::cout << "There are no contacts in the phonebook." << std::endl;
+        return;
+    }
+
+    for (int i = 0; i < nbContacts; i++)
+        printContact(i);
+
+    std::cout << "Enter the entry that you want to watch: ";
+    while (!(std::cin >> target) || target < 0 || target >= nbContacts)
+    {
+		std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid entry. Enter the entry that you want to watch: ";
+    }
+
+    std::cout << "First Name : " << contacts[target].getFirstName() << std::endl;
+    std::cout << "Last Name : " << contacts[target].getLastName() << std::endl;
+    std::cout << "Nick Name : " << contacts[target].getNickName() << std::endl;
+    std::cout << "Phone Number : " << contacts[target].getPhoneNumber() << std::endl;
+    std::cout << "Darkest Secret : " << contacts[target].getDarkestSecret() << std::endl;
 }
 
-void PhoneBook::printContact(int idx)
+std::string fitFormat(std::string str)
 {
-	unsigned int columnWidth = 10;
+	if (str.length() > 10)
+		str[9] = '.';
+	return str;
+}
 
-	std::string firstName = contacts[idx].getFirstName();
-	std::string lastName = contacts[idx].getLastName();
-	std::string nickName = contacts[idx].getNickName();
+void PhoneBook::printContact(int idx) {
+    unsigned int columnWidth = 10;
+    std::string target;
 
-	if (firstName.length() > columnWidth)
-		firstName = firstName.substr(0, columnWidth - 1) + ".";
-	if (lastName.length() > columnWidth)
-		lastName = lastName.substr(0, columnWidth - 1) + ".";
-	if (nickName.length() > columnWidth)
-		nickName = nickName.substr(0, columnWidth - 1) + ".";
-	std::cout << std::right << std::setw(columnWidth) << std::setfill(' ') << idx;
-	std::cout << "|";
-	std::cout << std::right << std::setw(columnWidth) << std::setfill(' ') << firstName;
-	std::cout << "|";
-	std::cout << std::right << std::setw(columnWidth) << std::setfill(' ') << lastName;
-	std::cout << "|";
-	std::cout << std::right << std::setw(columnWidth) << std::setfill(' ') << nickName;
-	std::cout << std::endl;
+    std::cout << std::right << std::setw(columnWidth) << std::setfill(' ') << idx << '|';
+    std::cout << std::right << std::setw(columnWidth) << std::setfill(' ') << fitFormat(contacts[idx].getFirstName()) << '|';
+    std::cout << std::right << std::setw(columnWidth) << std::setfill(' ') << fitFormat(contacts[idx].getLastName()) << '|';
+    std::cout << std::right << std::setw(columnWidth) << std::setfill(' ') << fitFormat(contacts[idx].getNickName()) << std::endl;
 }

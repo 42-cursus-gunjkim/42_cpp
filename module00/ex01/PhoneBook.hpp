@@ -9,15 +9,15 @@ class PhoneBook
 {
 private:
 	Contact contacts[8];
-	int nbContacts;
 	int lastContactIdx;
+	int nbContacts;
 
 public:
 	PhoneBook();
 	~PhoneBook();
 	PhoneBook(PhoneBook &pb);
 	PhoneBook &operator=(PhoneBook &pb);
-	void addContact(std::string firstName, std::string lastName, std::string nickName);
+	void addContact();
 	void searchContact();
 	void printContact(int idx);
 };
