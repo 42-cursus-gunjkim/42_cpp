@@ -11,6 +11,7 @@ public:
 	MyString(char c);
 	MyString(const char *str);
 	MyString(const MyString& str);
+	explicit MyString(int capacity);
 	~MyString();
 
 	MyString& assign(const MyString& str);
@@ -36,4 +37,6 @@ public:
 	int length() const;
 	void print() const;
 	void println() const;
+
+	bool operator==(MyString& str);
 };

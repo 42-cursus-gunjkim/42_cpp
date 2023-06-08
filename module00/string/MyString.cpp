@@ -21,6 +21,13 @@ MyString::MyString(const MyString& str) {
 	for (int i = 0; i < stringLength; i++) stringContent[i] = str.stringContent[i];
 }
 
+MyString::MyString(int capacity)
+{
+	stringContent = new char[capacity];
+	stringLength = 0;
+	memoryCapacity = capacity;
+}
+
 MyString::~MyString() { delete[] stringContent; }
 
 MyString& MyString::assign(const MyString& str) {
@@ -183,8 +190,14 @@ int MyString::length() const { return stringLength; }
 
 void MyString::print() const { for (int i = 0; i != stringLength; i++) std::cout << stringContent[i]; }
 
-void MyString::println() const {
+void MyString::println() const
+{
 	for (int i = 0; i != stringLength; i++)
 		std::cout << stringContent[i];
 	std::cout << std::endl;
+}
+
+bool MyString::operator==(MyString& str)
+{
+	return !compare(str);
 }
