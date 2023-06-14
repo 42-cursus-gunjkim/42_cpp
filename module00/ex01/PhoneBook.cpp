@@ -19,72 +19,48 @@ PhoneBook &PhoneBook::operator=(PhoneBook &pb)
 	return *this;
 }
 
-void PhoneBook::addContact()
+void PhoneBook::addContact(Contact &c)
 {
 	int	targetIdx = (lastContactIdx + 1) % 8;
 	lastContactIdx = targetIdx;
-	std::string input;
-
-	std::cout << "Enter first name : ";
-	std::cin >> input;
-	contacts[targetIdx].setFirstName(input);
-	std::cout << "Enter second name : ";
-	std::cin >> input;
-	contacts[targetIdx].setLastName(input);
-	std::cout << "Enter nickname : ";
-	std::cin >> input;
-	contacts[targetIdx].setNickName(input);
-	std::cout << "Enter phone number : ";
-	std::cin >> input;
-	contacts[targetIdx].setPhoneNumber(input);
-	std::cout << "Enter darkest secret : ";
-	std::cin >> input;
-	contacts[targetIdx].setDarkestSecret(input);
-	std::cout << "Succefully Added!" << std::endl;
-	nbContacts++;
-}
-
-void PhoneBook::searchContact()
-{
-    int target;
-
-    if (nbContacts == 0)
-    {
-        std::cout << "There are no contacts in the phonebook." << std::endl;
-        return;
-    }
-
-    for (int i = 0; i < nbContacts; i++)
-        printContact(i);
-
-    std::cout << "Enter the entry that you want to watch: ";
-    while (!(std::cin >> target) || target < 0 || target >= nbContacts)
-    {
-		std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Invalid entry. Enter the entry that you want to watch: ";
-    }
-
-    std::cout << "First Name : " << contacts[target].getFirstName() << std::endl;
-    std::cout << "Last Name : " << contacts[target].getLastName() << std::endl;
-    std::cout << "Nick Name : " << contacts[target].getNickName() << std::endl;
-    std::cout << "Phone Number : " << contacts[target].getPhoneNumber() << std::endl;
-    std::cout << "Darkest Secret : " << contacts[target].getDarkestSecret() << std::endl;
+	
+	contacts[lastContactIdx] = c;
+	if (nbContacts < 8)
+		nbContacts++;
 }
 
 std::string fitFormat(std::string str)
 {
 	if (str.length() > 10)
+	{
 		str[9] = '.';
+		str.erase(10);
+	}
 	return str;
 }
 
-void PhoneBook::printContact(int idx) {
-    unsigned int columnWidth = 10;
+void PhoneBook::printContacts() const {
+    int columnWidth = 10;
     std::string target;
 
-    std::cout << std::right << std::setw(columnWidth) << std::setfill(' ') << idx << '|';
-    std::cout << std::right << std::setw(columnWidth) << std::setfill(' ') << fitFormat(contacts[idx].getFirstName()) << '|';
-    std::cout << std::right << std::setw(columnWidth) << std::setfill(' ') << fitFormat(contacts[idx].getLastName()) << '|';
-    std::cout << std::right << std::setw(columnWidth) << std::setfill(' ') << fitFormat(contacts[idx].getNickName()) << std::endl;
+	std::cout << std::right << std::setfill(' ');
+	for (int idx = 0; idx < nbContacts; idx++)
+	{
+		std::cout << std::setw(columnWidth) << idx << '|';
+    	std::cout << std::setw(columnWidth) << fitFormat(contacts[idx].getFirstName()) << '|';
+    	std::cout << std::setw(columnWidth) << fitFormat(contacts[idx].getLastName()) << '|';
+    	std::cout << std::setw(columnWidth) << fitFormat(contacts[idx].getNickName()) << std::endl;
+	}
 }
+
+void PhoneBook::printContactDetail(int idx) const {
+	if (idx < 0 || idx >= nbContacts)
+		return;
+	std::cout << "First Name : " << contacts[idx].getFirstName() << std::endl;
+    std::cout << "Last Name : " << contacts[idx].getLastName() << std::endl;
+    std::cout << "Nick Name : " << contacts[idx].getNickName() << std::endl;
+    std::cout << "Phone Number : " << contacts[idx].getPhoneNumber() << std::endl;
+    std::cout << "Darkest Secret : " << contacts[idx].getDarkestSecret() << std::endl;
+}
+
+int PhoneBook::getNbContacts() const { return nbContacts; }
