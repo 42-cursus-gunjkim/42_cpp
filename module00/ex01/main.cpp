@@ -1,4 +1,5 @@
 #include "PhoneBook.hpp"
+#include "cstdlib"
 
 void contactAdder(PhoneBook &pb)
 {
@@ -20,8 +21,10 @@ void contactAdder(PhoneBook &pb)
 		std::getline(std::cin, temp);
 		if (std::cin.eof())
 		{
-			std::cout << "EOF detected, exiting..." << std::endl;
-			return ;
+			clearerr(stdin);
+			std::cin.clear();
+			i--;
+			continue;
 		}
 		if (temp.length() == 0)
 		{
@@ -41,14 +44,11 @@ void contactSearcher(PhoneBook &pb)
 	int index = 0;
 	std::cout << "Enter index that you want to watch : ";
 	std::cin >> index;
-	std::cout << index << std::endl;
-	while (!std::cin)
+
+	while (1)
 	{
 		if (std::cin.eof())
-		{
-			std::cout << "EOF detected, exiting..." << std::endl;
 			exit(0);
-		}
 		std::cin.clear();
 		std::cin.ignore(256, '\n');
 		std::cout << "Invalid index." << std::endl;
@@ -70,8 +70,9 @@ int main()
     	std::getline(std::cin, command);
 		if (std::cin.eof())
         {
-            std::cout << "EOF detected, exiting..." << std::endl;
-			return 0;
+            clearerr(stdin);
+			std::cin.clear()
+			continue;
         }
     	if (command == "EXIT")
         	break;
