@@ -39,10 +39,15 @@ std::string fitFormat(std::string str)
 	return str;
 }
 
-void PhoneBook::printContacts() const {
+bool PhoneBook::printContacts() const {
     int columnWidth = 10;
     std::string target;
 
+	if (nbContacts == 0)
+	{
+		std::cout << "PhoneBook : There are no contacts in PhoneBook..." << std::endl;
+		return false;
+	}
 	std::cout << std::right << std::setfill(' ');
 	for (int idx = 0; idx < nbContacts; idx++)
 	{
@@ -51,16 +56,18 @@ void PhoneBook::printContacts() const {
     	std::cout << std::setw(columnWidth) << fitFormat(contacts[idx].getLastName()) << '|';
     	std::cout << std::setw(columnWidth) << fitFormat(contacts[idx].getNickName()) << std::endl;
 	}
+	return true;
 }
 
 void PhoneBook::printContactDetail(int idx) const {
 	if (idx < 0 || idx >= nbContacts)
+	{
+		std::cout << "PhoneBook : No Contact Idx [ " << idx << " ]" << std::endl;
 		return;
+	}
 	std::cout << "First Name : " << contacts[idx].getFirstName() << std::endl;
     std::cout << "Last Name : " << contacts[idx].getLastName() << std::endl;
     std::cout << "Nick Name : " << contacts[idx].getNickName() << std::endl;
     std::cout << "Phone Number : " << contacts[idx].getPhoneNumber() << std::endl;
     std::cout << "Darkest Secret : " << contacts[idx].getDarkestSecret() << std::endl;
 }
-
-int PhoneBook::getNbContacts() const { return nbContacts; }

@@ -17,9 +17,8 @@ public:
 	~PhoneBook();
 	PhoneBook(PhoneBook &pb);
 	PhoneBook &operator=(PhoneBook &pb);
-	int getNbContacts() const;
 	void addContact(Contact &c);
-	void printContacts() const;
+	bool printContacts() const;
 	void printContactDetail(int idx) const;
 };
 

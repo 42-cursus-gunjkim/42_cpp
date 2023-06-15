@@ -10,6 +10,7 @@ void contactAdder(PhoneBook &pb)
 		&Contact::setPhoneNumber,
 		&Contact::setDarkestSecret
 	};
+
 	Contact target;
 	std::string temp;
 
@@ -24,7 +25,6 @@ void contactAdder(PhoneBook &pb)
 		}
 		if (temp.length() == 0)
 		{
-			std::cout << "Invalid input" << std::endl;
 			i--;
 			continue;
 		}
@@ -34,19 +34,15 @@ void contactAdder(PhoneBook &pb)
 }
 
 void contactSearcher(PhoneBook &pb)
-{
-	if (pb.getNbContacts() == 0)
-	{
-		std::cout << "No contacts" << std::endl;
-		return ;
-	}
-	
-	pb.printContacts();
+{	
+	if (pb.printContacts() == false)
+		return;
 
-	int index;
+	int index = 0;
 	std::cout << "Enter index that you want to watch : ";
 	std::cin >> index;
-	while (!std::cin >> index || (index < 0 && index < pb.getNbContacts()))
+	std::cout << index << std::endl;
+	while (!std::cin)
 	{
 		if (std::cin.eof())
 		{
