@@ -1,19 +1,19 @@
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook() : lastContactIdx(-1), nbContacts(0) {}
+PhoneBook::PhoneBook() : last_contact_idx(-1), nb_contacts(0) {}
 
 PhoneBook::~PhoneBook() {}
 
 PhoneBook::PhoneBook(PhoneBook &pb)
 {
-	lastContactIdx = pb.lastContactIdx;
+	last_contact_idx = pb.last_contact_idx;
 	for (int i = 0; i < 8; i++)
 		contacts[i] = pb.contacts[i];
 }
 
 PhoneBook &PhoneBook::operator=(PhoneBook &pb)
 {
-	lastContactIdx = pb.lastContactIdx;
+	last_contact_idx = pb.last_contact_idx;
 	for (int i = 0; i < 8; i++)
 		contacts[i] = pb.contacts[i];
 	return *this;
@@ -21,12 +21,12 @@ PhoneBook &PhoneBook::operator=(PhoneBook &pb)
 
 void PhoneBook::addContact(Contact &c)
 {
-	int	targetIdx = (lastContactIdx + 1) % 8;
-	lastContactIdx = targetIdx;
+	int	targetIdx = (last_contact_idx + 1) % 8;
+	last_contact_idx = targetIdx;
 	
-	contacts[lastContactIdx] = c;
-	if (nbContacts < 8)
-		nbContacts++;
+	contacts[last_contact_idx] = c;
+	if (nb_contacts < 8)
+		nb_contacts++;
 }
 
 std::string fitFormat(std::string str)
@@ -39,28 +39,34 @@ std::string fitFormat(std::string str)
 	return str;
 }
 
-bool PhoneBook::printContacts() const {
+int PhoneBook::getNbContacts() {
+	return this->nb_contacts;
+}
+
+void PhoneBook::printContacts() const {
     int columnWidth = 10;
     std::string target;
 
-	if (nbContacts == 0)
-	{
-		std::cout << "PhoneBook : There are no contacts in PhoneBook..." << std::endl;
-		return false;
-	}
 	std::cout << std::right << std::setfill(' ');
-	for (int idx = 0; idx < nbContacts; idx++)
+	
+	std::cout
+		<< std::setw(columnWidth) << "index" << '|'
+		<< std::setw(columnWidth) << "first name" << '|'
+    	<< std::setw(columnWidth) << "last name" << '|'
+    	<< std::setw(columnWidth) << "nick name" << std::endl;
+
+	for (int idx = 0; idx < nb_contacts; idx++)
 	{
-		std::cout << std::setw(columnWidth) << idx << '|';
-    	std::cout << std::setw(columnWidth) << fitFormat(contacts[idx].getFirstName()) << '|';
-    	std::cout << std::setw(columnWidth) << fitFormat(contacts[idx].getLastName()) << '|';
-    	std::cout << std::setw(columnWidth) << fitFormat(contacts[idx].getNickName()) << std::endl;
+		std::cout 
+			<< std::setw(columnWidth) << idx << '|'
+    		<< std::setw(columnWidth) << fitFormat(contacts[idx].getFirstName()) << '|'
+    		<< std::setw(columnWidth) << fitFormat(contacts[idx].getLastName()) << '|'
+    		<< std::setw(columnWidth) << fitFormat(contacts[idx].getNickName()) << std::endl;
 	}
-	return true;
 }
 
 void PhoneBook::printContactDetail(int idx) const {
-	if (idx < 0 || idx >= nbContacts)
+	if (idx < 0 || idx >= nb_contacts)
 	{
 		std::cout << "PhoneBook : No Contact Idx [ " << idx << " ]" << std::endl;
 		return;

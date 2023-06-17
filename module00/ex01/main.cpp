@@ -1,9 +1,10 @@
 #include "PhoneBook.hpp"
-#include "cstdlib"
+#include <sstream>
+#include <cstdio>
 
 void contactAdder(PhoneBook &pb)
 {
-	std::string addMsg[] = {"first name", "last name", "nickname", "phone number", "darkest secret"};
+	std::string add_msg[] = {"first name", "last name", "nickname", "phone number", "darkest secret"};
 	void (Contact::*setter[])(std::string &input) = {
 		&Contact::setFirstName,
 		&Contact::setLastName,
@@ -17,13 +18,14 @@ void contactAdder(PhoneBook &pb)
 
 	for (int i = 0; i < 5; i++)
 	{
-		std::cout << "Enter " << addMsg[i] << ": ";
+		std::cout << "Enter " << add_msg[i] << ": ";
 		std::getline(std::cin, temp);
 		if (std::cin.eof())
 		{
 			clearerr(stdin);
 			std::cin.clear();
 			i--;
+			std::cout << std::endl;
 			continue;
 		}
 		if (temp.length() == 0)
@@ -38,24 +40,37 @@ void contactAdder(PhoneBook &pb)
 
 void contactSearcher(PhoneBook &pb)
 {	
-	if (pb.printContacts() == false)
+	if (pb.getNbContacts() == 0)
+	{
+		std::cout << "PhonBook : There is no contact in PhoneBook..." << std::endl;
 		return;
+	}
 
+	pb.printContacts();
+
+	std::string index_str;
 	int index = 0;
-	std::cout << "Enter index that you want to watch : ";
-	std::cin >> index;
 
 	while (1)
 	{
-		if (std::cin.eof())
-			exit(0);
-		std::cin.clear();
-		std::cin.ignore(256, '\n');
-		std::cout << "Invalid index." << std::endl;
 		std::cout << "Enter index that you want to watch : ";
-		std::cin >> index;
+		std::getline(std::cin, index_str);
+		if (std::cin.eof())
+		{
+			clearerr(stdin);
+			std::cin.clear();
+			continue;
+		}
+		std::stringstream ss(index_str);
+		ss >> index;
+		if (ss.fail())
+		{
+			std::cout << "Enter numeric Index...";
+			continue;
+		}
+		else
+			break;
 	}
-	std::cin.ignore(256, '\n');
 	pb.printContactDetail(index);
 }
 
@@ -71,7 +86,7 @@ int main()
 		if (std::cin.eof())
         {
             clearerr(stdin);
-			std::cin.clear()
+			std::cin.clear();
 			continue;
         }
     	if (command == "EXIT")
