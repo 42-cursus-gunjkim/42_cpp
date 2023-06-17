@@ -65,7 +65,7 @@ void contactSearcher(PhoneBook &pb)
 		ss >> index;
 		if (ss.fail())
 		{
-			std::cout << "Enter numeric Index...";
+			std::cout << "Enter numeric Index..." << std::endl;
 			continue;
 		}
 		else
