@@ -14,7 +14,7 @@ public:
 	Weapon(const Weapon &w);
 	~Weapon();
 
-	Weapon &operator=(Weapon &w);
+	Weapon &operator=(const Weapon &w);
 
 	void setType(const std::string &type);
 	const std::string &getType() const;

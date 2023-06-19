@@ -1,10 +1,6 @@
 {
     "files.associations": {
-        "iostream": "cpp",
         "iosfwd": "cpp",
-        "istream": "cpp",
-        "ios": "cpp",
-        "string": "cpp",
         "__bit_reference": "cpp",
         "__config": "cpp",
         "__debug": "cpp",
@@ -43,6 +39,9 @@
         "functional": "cpp",
         "initializer_list": "cpp",
         "iomanip": "cpp",
+        "ios": "cpp",
+        "iostream": "cpp",
+        "istream": "cpp",
         "iterator": "cpp",
         "limits": "cpp",
         "locale": "cpp",
@@ -56,6 +55,7 @@
         "stack": "cpp",
         "stdexcept": "cpp",
         "streambuf": "cpp",
+        "string": "cpp",
         "string_view": "cpp",
         "system_error": "cpp",
         "tuple": "cpp",

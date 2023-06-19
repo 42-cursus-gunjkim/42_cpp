@@ -1,10 +1,8 @@
 CXX=c++
 CFLAGS=-std=c++98 -Wall -Wextra -Werror
-NAME=ex01
+NAME=ex04
 
 SRCS= main.cpp \
-	  Zombie.cpp \
-	  zombieHorde.cpp \
 
 OBJS= $(SRCS:.cpp=.o)
 

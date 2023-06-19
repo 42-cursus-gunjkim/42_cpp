@@ -14,7 +14,7 @@ public:
 	HumanA(const std::string &name, Weapon &weapon);
 	~HumanA();
 	HumanA(const HumanA &h);
-	HumanA& operator=(HumanA &h);
+	HumanA& operator=(const HumanA &h);
 
 	void attack();
 };

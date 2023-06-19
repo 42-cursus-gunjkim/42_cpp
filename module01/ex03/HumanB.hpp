@@ -14,7 +14,7 @@ public:
 	HumanB(const std::string &name);
 	~HumanB();
 	HumanB(const HumanB &h);
-	HumanB& operator=(HumanB &h);
+	HumanB& operator=(const HumanB &h);
 
 	void setWeapon(Weapon &weapon);
 	void attack();

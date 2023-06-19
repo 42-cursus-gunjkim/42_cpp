@@ -12,13 +12,14 @@ private:
 public:
 	Zombie();
 	~Zombie();
-	Zombie(Zombie &z);
-	Zombie &operator=(Zombie &z);
+	Zombie(const Zombie &z);
+	Zombie &operator=(const Zombie &z);
 
 	void announce();
-	void setName(std::string name);
+	void setName(const std::string &name);
 };
 
-Zombie* zombieHorde( int N, std::string name);
+Zombie* newZombie(std::string name);
+void randomChump(std::string name);
 
 #endif

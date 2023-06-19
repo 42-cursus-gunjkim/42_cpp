@@ -1,16 +1,13 @@
 #include "HumanB.hpp"
 #include <iostream>
 
-HumanB::HumanB(const std::string &name) {
-	this->name = name;
-	this->weapon = NULL;
-}
+HumanB::HumanB(const std::string &name) : name(name), weapon(NULL) {}
 
 HumanB::~HumanB() {}
 
 HumanB::HumanB(const HumanB &h) : name(h.name), weapon(h.weapon){}
 
-HumanB &HumanB::operator=(HumanB &h) {
+HumanB &HumanB::operator=(const HumanB &h) {
 	this->name = h.name;
 	this->weapon = h.weapon;
 	return *this;

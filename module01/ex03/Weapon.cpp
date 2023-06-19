@@ -8,7 +8,7 @@ Weapon::Weapon(const Weapon &w) {
 	this->type = w.type;
 }
 
-Weapon &Weapon::operator=(Weapon &w) {
+Weapon &Weapon::operator=(const Weapon &w) {
 	this->type = w.type;
 	return *this;
 }

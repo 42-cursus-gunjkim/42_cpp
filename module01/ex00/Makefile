@@ -1,6 +1,6 @@
 CXX=c++
 CFLAGS=-std=c++98 -Wall -Wextra -Werror
-NAME=zombie
+NAME=ex00
 
 SRCS= main.cpp \
 	  Zombie.cpp \

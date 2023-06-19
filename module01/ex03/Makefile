@@ -1,6 +1,6 @@
 CXX=c++
 CFLAGS=-std=c++98 -Wall -Wextra -Werror
-NAME=ex02
+NAME=ex03
 
 SRCS= main.cpp \
 	  Weapon.cpp \
