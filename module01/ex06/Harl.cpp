@@ -2,13 +2,7 @@
 #include <iostream>
 
 Harl::Harl() {
-    this->commenters = new comment_ptr[4];
     this->levels = new std::string[4];
-
-    this->commenters[0] = &Harl::debug;
-    this->commenters[1] = &Harl::info;
-    this->commenters[2] = &Harl::warning;
-    this->commenters[3] = &Harl::error;
 
     this->levels[0] = "DEBUG";
     this->levels[1] = "INFO";
@@ -17,18 +11,11 @@ Harl::Harl() {
 }
 
 Harl::~Harl() {
-    delete[] this->commenters;
     delete[] this->levels;
 }
 
 Harl::Harl(const Harl& h) {
-    this->commenters = new comment_ptr[4];
     this->levels = new std::string[4];
-
-    this->commenters[0] = h.commenters[0];
-    this->commenters[1] = h.commenters[1];
-    this->commenters[2] = h.commenters[2];
-    this->commenters[3] = h.commenters[3];
 
     this->levels[0] = h.levels[0];
     this->levels[1] = h.levels[1];
@@ -37,11 +24,6 @@ Harl::Harl(const Harl& h) {
 }
 
 Harl& Harl::operator=(const Harl& h) {
-    this->commenters[0] = h.commenters[0];
-    this->commenters[1] = h.commenters[1];
-    this->commenters[2] = h.commenters[2];
-    this->commenters[3] = h.commenters[3];
-
     this->levels[0] = h.levels[0];
     this->levels[1] = h.levels[1];
     this->levels[2] = h.levels[2];
@@ -79,7 +61,12 @@ void Harl::error() {
         << "I want to speak to the manager now." << std::endl;
 }
 
-void Harl::complain(std::string level) {
+void Harl::exception() {
+    std::cout
+        << "[ Probably complaining about insignificant problems ]" << std::endl;
+}
+
+void Harl::harl_filter(std::string level) {
     int target_idx = -1;
 
     for (int i = 0; i < 4; i++) {
@@ -88,9 +75,18 @@ void Harl::complain(std::string level) {
             break;
         }
     }
-    if (target_idx == -1) {
-        std::cout << "There is no match..." << std::endl;
-        return;
+    
+    switch(target_idx) {
+        case -1:
+            exception();
+            break;
+        case 0:
+            debug();
+        case 1:
+            info();
+        case 2:
+            warning();
+        case 3:
+            error();
     }
-    (this->*commenters[target_idx])();
 }

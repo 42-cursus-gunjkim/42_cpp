@@ -7,22 +7,20 @@
 class Harl {
 
 private:
-    typedef void (Harl::*comment_ptr)(void);
-
-    comment_ptr *commenters;
     std::string *levels;
 
     void debug(void);
     void info(void);
     void warning(void);
     void error(void);
+    void exception(void);
 
 public:
     Harl();
     ~Harl();
     Harl(const Harl& h);
     Harl& operator=(const Harl& h);
-    void complain(std::string level);
+    void harl_filter(std::string level);
 };
 
 #endif
