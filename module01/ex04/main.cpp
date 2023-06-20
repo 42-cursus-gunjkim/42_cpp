@@ -37,11 +37,11 @@ int main(int argc, char *argv[])
 	std::ifstream reader;
 	std::ofstream writer;
 
-	reader.open(infile);
+	reader.open(infile.c_str());
 	if (reader.fail())
 		return 0;
 		
-	writer.open(outfile);
+	writer.open(outfile.c_str());
 	if (writer.fail()) {
 		reader.close();
 		return 0;
@@ -56,5 +56,7 @@ int main(int argc, char *argv[])
 		writer << new_line << std::endl;
 		std::getline(reader, line);
 	}
+	reader.close();
+	writer.close();
 	return 0;
 }

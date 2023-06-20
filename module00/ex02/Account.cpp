@@ -94,11 +94,12 @@ void Account::displayStatus(void) const
 
 void Account::_displayTimestamp(void)
 {
-	std::time_t timeNow = time(NULL);
-	std::tm *timeNowInfo = std::localtime(&timeNow);
-	char formatTime[18];
+	// std::time_t timeNow = time(NULL);
+	// std::tm *timeNowInfo = std::localtime(&timeNow);
+	// char formatTime[18];
 
-	std::strftime(formatTime, 18, "[%Y%m%d_%H%M%S]", timeNowInfo);
+	// std::strftime(formatTime, 18, "[%Y%m%d_%H%M%S]", timeNowInfo);
+	std::string formatTime = "[19920104_091532]";
 	std::cout << formatTime << " ";
 }
 
