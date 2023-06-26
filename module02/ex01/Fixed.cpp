@@ -16,7 +16,7 @@ Fixed::Fixed(const int n) {
 
 Fixed::Fixed(const float n) {
 	std::cout << "Float constructor called" << std::endl;
-	this->fixedPointValue = roundf(n * (1 << fractionalBits));
+	this->fixedPointValue = static_cast<int>(roundf(n * (1 << fractionalBits)));
 }
 
 Fixed::Fixed(const Fixed& f) {
@@ -46,7 +46,7 @@ float Fixed::toFloat() const {
 }
 
 int Fixed::toInt() const {
-	return roundf(toFloat());
+	return static_cast<int>(roundf(toFloat()));
 }
 
 std::ostream& operator<<(std::ostream& out, const Fixed& f) {

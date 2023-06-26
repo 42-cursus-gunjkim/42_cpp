@@ -22,6 +22,7 @@ public:
 	Fixed &operator--();
 	Fixed operator++(int);
 	Fixed operator--(int);
+
 	Fixed operator+(const Fixed &f);
 	Fixed operator-(const Fixed &f);
 	Fixed operator*(const Fixed &f);
@@ -39,6 +40,7 @@ public:
 	float toFloat() const;
 	int toInt() const;
 
+	static int getFractionalBits();
 	static Fixed &min(Fixed &a, Fixed &b);
 	static Fixed &min(const Fixed &a, const Fixed &b);
 	static Fixed &max(Fixed &a, Fixed &b);
@@ -46,5 +48,16 @@ public:
 };
 
 std::ostream &operator<<(std::ostream &out, const Fixed &f);
+
+Fixed operator+(const Fixed &a, const Fixed &b);
+Fixed operator-(const Fixed &a, const Fixed &b);
+Fixed operator*(const Fixed &a, const Fixed &b);
+Fixed operator/(const Fixed &a, const Fixed &b);
+bool operator<(const Fixed &a, const Fixed &b);
+bool operator>(const Fixed &a, const Fixed &b);
+bool operator<=(const Fixed &a, const Fixed &b);
+bool operator>=(const Fixed &a, const Fixed &b);
+bool operator==(const Fixed &a, const Fixed &b);
+bool operator!=(const Fixed &a, const Fixed &b);
 
 #endif

@@ -33,6 +33,10 @@ int Fixed::toInt() const {
 	return static_cast<int>(roundf(toFloat()));
 }
 
+int Fixed::getFractionalBits() {
+	return Fixed::fractionalBits;
+}
+
 Fixed &Fixed::min(Fixed &a, Fixed &b) {
 	return (a <= b) ? a : b;
 }
@@ -134,3 +138,54 @@ bool Fixed::operator!=(const Fixed &f) {
 	return this->getRawBits() != f.getRawBits();
 }
 
+Fixed operator+(const Fixed &a, const Fixed &b) {
+	Fixed result;
+	
+	result.setRawBits(a.getRawBits() + b.getRawBits());
+	return result;
+}
+
+Fixed operator-(const Fixed &a, const Fixed &b) {
+	Fixed result;
+
+	result.setRawBits(a.getRawBits() - b.getRawBits());
+	return result;
+}
+
+Fixed operator*(const Fixed &a, const Fixed &b) {
+	Fixed result;
+
+	result.setRawBits(static_cast<int>(roundf(a.getRawBits() * b.getRawBits() >> Fixed::getFractionalBits())));
+	return result;
+}
+
+Fixed operator/(const Fixed &a, const Fixed &b) {
+	Fixed result;
+
+	result.setRawBits(static_cast<int>(roundf(a.getRawBits() / b.getRawBits() * (1 << Fixed::getFractionalBits()))));
+	return result;
+}
+
+bool operator<(const Fixed &a, const Fixed &b) {
+	return a.getRawBits() < b.getRawBits();
+}
+
+bool operator>(const Fixed &a, const Fixed &b) {
+	return a.getRawBits() > b.getRawBits();
+}
+
+bool operator<=(const Fixed &a, const Fixed &b) {
+	return a.getRawBits() <= b.getRawBits();
+}
+
+bool operator>=(const Fixed &a, const Fixed &b) {
+	return a.getRawBits() >= b.getRawBits();
+}
+
+bool operator==(const Fixed &a, const Fixed &b) {
+	return a.getRawBits() == b.getRawBits();
+}
+
+bool operator!=(const Fixed &a, const Fixed &b) {
+	return a.getRawBits() != b.getRawBits();
+}
