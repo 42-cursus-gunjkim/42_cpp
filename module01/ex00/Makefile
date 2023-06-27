@@ -14,8 +14,8 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CXX) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.cpp
-	$(CXX) $(CFLAGS) -c $< -o $@
+# %.o: %.cpp
+# 	$(CXX) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
