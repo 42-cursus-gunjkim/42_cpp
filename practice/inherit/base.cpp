@@ -7,28 +7,29 @@ protected:
     std::string parent_string;
 
 public:
-    Base() : parent_string("기반") { std::cout << "기반클래스" << std::endl; what(); }
+    Base() : parent_string("기반") { std::cout << "기반클래스" << std::endl; }
 
-    void what() { std::cout << parent_string << std::endl; }
+    virtual void what() { std::cout << parent_string << std::endl; }
 };
 
 class Derived : public Base {
+
+private:
     std::string s;
 
 public:
     Derived() : Base(), s("파생") {
         std::cout << "파생 클래스" << std::endl;
-        parent_string="바꿔줘";
-        what();
     }
 
-    // void what() { std::cout << s << std::endl; }
+    void what() { std::cout << s << std::endl; }
 };
 
 int main() {
-    std::cout << " === base === " << std::endl;
-    Base p;
-
-    std::cout << " === derived === " << std::endl;
+    Base *p;
     Derived d;
+
+    p = &d;
+
+    p->what();
 }

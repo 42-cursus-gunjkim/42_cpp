@@ -3,6 +3,8 @@
 #include <iostream>
 
 class Employee {
+
+protected: 
     std::string name;
     int age;
 
@@ -22,23 +24,40 @@ public :
 
     Employee() {}
 
-    void printInfo() {
+    virtual void printInfo() {
         std::cout
             << "name : " << this->name << std::endl
             << "position : " << this->position << std::endl
             << "age : " << this->age << std::endl
-            << "wage : " << calculatePay() << "won" << std::endl;
+            << "wage : " << calculatePay() << "won" << std::endl
+            << "---------------" << std::endl << std::endl;
     }
 
-    int calculatePay() { return 200 + this->rank * 50;} 
+    virtual int calculatePay() { return 200 + this->rank * 50;} 
 };
 
 class Manager : public Employee {
     int year_of_service;
 
 public:
-    Manager(std::string name, int age, std::string position, int rank, int year)
-        : year_of_service
+    Manager(std::string name, int age, std::string position, int rank, int year_of_service)
+        : year_of_service(year_of_service), Employee(name, age, position, rank) {}
+    
+    Manager(const Manager& manager)
+        : year_of_service(manager.year_of_service), Employee(manager.name, manager.age, manager.position, manager.rank) {
+        }
+    Manager() : Employee() {}
+
+    int calculatePay() { return 200 + rank * 50 + 5 * year_of_service; }
+    void printInfo() {
+        std::cout
+            << "name : " << this->name << std::endl
+            << "position : " << this->position << std::endl
+            << "age : " << this->age << std::endl
+            << "wage : " << calculatePay() << "won" << std::endl
+            << "year of service : " << this->year_of_service << "year" << std::endl
+            << "---------------" << std::endl << std::endl;
+    }
 };
 
 class EmployeeList {
@@ -81,9 +100,9 @@ int main() {
   emp_list.addEmployee(new Employee("노홍철", 34, "평사원", 1));
   emp_list.addEmployee(new Employee("하하", 34, "평사원", 1));
 
-  emp_list.addEmployee(new Employee("유재석", 41, "부장", 7));
-  emp_list.addEmployee(new Employee("정준하", 43, "과장", 4));
-  emp_list.addEmployee(new Employee("박명수", 43, "차장", 5));
+  emp_list.addEmployee(new Manager("유재석", 41, "부장", 7, 12));
+  emp_list.addEmployee(new Manager("정준하", 43, "과장", 4, 15));
+  emp_list.addEmployee(new Manager("박명수", 43, "차장", 5, 13));
   emp_list.addEmployee(new Employee("정형돈", 36, "대리", 2));
   emp_list.addEmployee(new Employee("길", 36, "인턴", -2));
   emp_list.printEmployeeInfo();
