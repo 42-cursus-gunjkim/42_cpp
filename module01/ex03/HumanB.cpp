@@ -20,5 +20,9 @@ void HumanB::setWeapon(Weapon &weapon) {
 }
 
 void HumanB::attack() {
+	if (this->weapon == NULL) {
+		std::cout << this->name << " punch to enemy because " << this->name << " has no weapon..." << std::endl;
+		return;
+	}
 	std::cout << this->name << " attacks with their " << this->weapon->getType() << std::endl;
 }

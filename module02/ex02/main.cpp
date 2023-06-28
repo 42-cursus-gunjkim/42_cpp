@@ -1,8 +1,8 @@
 #include "Fixed.hpp"
 
 int main() {
-	Fixed a(8388608);
-	Fixed const b(5.258f);
+	Fixed a(127.0f);
+	Fixed const b(256.0f);
 
 	std::cout << sizeof(int) << std::endl;
 	std::cout << a << std::endl;

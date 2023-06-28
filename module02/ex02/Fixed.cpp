@@ -99,7 +99,7 @@ Fixed Fixed::operator-(const Fixed &f) {
 Fixed Fixed::operator*(const Fixed &f) {
 	Fixed result;
 
-	result.setRawBits(static_cast<int>(roundf((this->getRawBits() * f.getRawBits()) >> Fixed::fractionalBits)));
+	result.setRawBits(static_cast<int>((this->toFloat() * f.toFloat()) *(1 << Fixed::fractionalBits)));
 	return result;
 }
 
