@@ -4,12 +4,14 @@ class Parent {
 public:
     Parent() { std::cout << "Parent constructor" << std::endl; }
     virtual ~Parent() { std::cout << "Parent destructor" << std::endl; }
+    virtual void what() { std::cout << "im parent" << std::endl; }
 };
 
 class Child : public Parent {
 public:
     Child() : Parent() { std::cout << "Child constructor" << std::endl; }
     ~Child() { std::cout << "Child destructor" << std::endl; }
+    void what() { std::cout << "can you access?" << std::endl; }
 };
 
 int main() {
@@ -21,9 +23,9 @@ int main() {
     //     delete p;
     // }
 
-    Parent a;
-    Child b;
+    Parent a = Child();
+    Parent *b = new Child();
 
-    Parent &c = b;
-
+    a.what();
+    b->what();
 }
