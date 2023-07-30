@@ -2,12 +2,11 @@
 #include <iostream>
 
 FragTrap::FragTrap(const std::string &name) : ClapTrap(name) {
-    this->maxHitPoints = 100;
     this->hitPoints = 100;
     this->energyPoints = 100;
-    this->attackDamage = 30;
 
     std::cout << "FragTrap " << this->name << " is constructed by FragTrap(const std::string &name)" << std::endl;
+	whoAmI();
 }
 
 FragTrap::FragTrap(const FragTrap &ft) : ClapTrap(dynamic_cast<const FragTrap&>(ft)) {
@@ -22,7 +21,6 @@ FragTrap &FragTrap::operator=(const FragTrap &st) {
     this->name = st.name;
     this->hitPoints = st.hitPoints;
     this->energyPoints = st.energyPoints;
-    this->attackDamage = st.attackDamage;
 
     return *this;
 }

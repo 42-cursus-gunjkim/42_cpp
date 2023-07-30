@@ -1,6 +1,6 @@
 CXX=c++
 CXXFLAGS=-std=c++98 -Wall -Wextra -Werror
-NAME=ex02
+NAME=ex03
 
 SRCS=main.cpp \
 	ClapTrap.cpp \

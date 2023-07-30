@@ -1,19 +1,23 @@
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 #include <iostream>
 
 int main() {
-    ClapTrap nick("Nick");
-    ScavTrap john("John");
+    //ClapTrap clap("Clap");
+    //ScavTrap scav("Scav");
+	//FragTrap frag("Frag");
+	DiamondTrap diamond("Diamond");
 
-    for (int i = 0; i < 11; i++) {
-        nick.attack(john.getName());
-        john.takeDamage(nick.getDamage());
-        john.beRepaired(1);
-    }
+	//DiamondTrap another(diamond);
 
-    john.attack(nick.getName());
-    nick.takeDamage(john.getDamage());
+	//clap.whoAmI();
+	//scav.whoAmI();
+	//frag.whoAmI();
+	//diamond.whoAmI();
+	//another.whoAmI();
+
     
     return 0;
 }

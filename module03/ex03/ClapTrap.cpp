@@ -1,11 +1,12 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
-ClapTrap::ClapTrap(const std::string &name) : name(name), maxHitPoints(10), hitPoints(10), energyPoints(10), attackDamage(0) {
+ClapTrap::ClapTrap(const std::string &name) : name(name), hitPoints(maxHitPoints), energyPoints(maxEnergyPoints) {
     std::cout << "ClapTrap " << this->name << " constructed by ClapTrap(const std::string &name)" << std::endl;
+	whoAmI();
 }
 
-ClapTrap::ClapTrap(const ClapTrap &ct) : name(ct.name), maxHitPoints(10), hitPoints(ct.hitPoints), energyPoints(ct.energyPoints), attackDamage(ct.attackDamage) {
+ClapTrap::ClapTrap(const ClapTrap &ct) : name(ct.name), hitPoints(ct.hitPoints), energyPoints(ct.energyPoints) {
     std::cout << "ClapTrap " << this->name << " constructed by ClapTrap(const ClapTrap &ct)" << std::endl;
 }
 
@@ -16,10 +17,8 @@ ClapTrap::~ClapTrap() {
 ClapTrap &ClapTrap::operator=(const ClapTrap &ct) {
     std::cout << "claptrap assign operator called" << std::endl;
     this->name = ct.name;
-    this->maxHitPoints = ct.maxHitPoints;
     this->hitPoints = ct.hitPoints;
     this->energyPoints = ct.energyPoints;
-    this->attackDamage = ct.attackDamage;
 
     return *this;
 }
