@@ -84,3 +84,11 @@ void ScavTrap::guardGate() {
     }
     std::cout << "ScavTrap " << this->name << " is now in gatekeeper mode" << std::endl;
 }
+
+std::string ScavTrap::getName() const {
+    return this->name;
+}
+
+unsigned int ScavTrap::getDamage() const {
+    return this->attackDamage;
+}

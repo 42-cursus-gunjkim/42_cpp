@@ -1,12 +1,11 @@
 #include "DiamondTrap.hpp"
 #include <iostream>
 
-DiamondTrap::DiamondTrap(const std::string &name) : ClapTrap(name + "_clap_name"), ScavTrap(name + "_clap_name"), FragTrap(name + "_clap_name") {
+DiamondTrap::DiamondTrap(const std::string &name) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name) {
 	this->name = name;
 	this->hitPoints = FragTrap::maxHitPoints;
 	this->energyPoints = ScavTrap::maxEnergyPoints;
 	std::cout << "DiamondTrap " << this->name << " is constructed by DiamondTrap(const std::string &name)" << std::endl;
-	whoAmI();
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &dt) : ClapTrap(dynamic_cast<const ClapTrap&>(dt)), ScavTrap(dynamic_cast<const ScavTrap&>(dt)), FragTrap(dynamic_cast<const FragTrap&>(dt)) {
@@ -27,4 +26,16 @@ void DiamondTrap::takeDamage(unsigned int amount) {
 
 void DiamondTrap::beRepaired(unsigned int amount) {
     ScavTrap::beRepaired(amount);
+}
+
+void DiamondTrap::whoAmI() {
+	std::cout << "My name is " << this->name << " , also Another name is " << ClapTrap::name << "." << std::endl;
+}
+
+std::string DiamondTrap::getName() const {
+    return this->name;
+}
+
+unsigned int DiamondTrap::getDamage() const {
+    return this->attackDamage;
 }

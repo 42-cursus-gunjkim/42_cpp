@@ -10,15 +10,18 @@ private:
 public:
     ScavTrap(const std::string &name);
     ScavTrap(const ScavTrap &st);
-    ~ScavTrap();
+    virtual ~ScavTrap();
 
     ScavTrap &operator=(const ScavTrap &st);
 
-    void attack(const std::string &target);
-    void takeDamage(unsigned int amount);
-    void beRepaired(unsigned int amount);
+    virtual void attack(const std::string &target);
+    virtual void takeDamage(unsigned int amount);
+    virtual void beRepaired(unsigned int amount);
 
     void guardGate();
+
+    virtual std::string getName() const;
+    virtual unsigned int getDamage() const;
 };
 
 #endif

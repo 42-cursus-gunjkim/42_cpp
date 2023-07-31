@@ -3,7 +3,6 @@
 
 ClapTrap::ClapTrap(const std::string &name) : name(name), hitPoints(maxHitPoints), energyPoints(maxEnergyPoints) {
     std::cout << "ClapTrap " << this->name << " constructed by ClapTrap(const std::string &name)" << std::endl;
-	whoAmI();
 }
 
 ClapTrap::ClapTrap(const ClapTrap &ct) : name(ct.name), hitPoints(ct.hitPoints), energyPoints(ct.energyPoints) {

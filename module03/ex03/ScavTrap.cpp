@@ -6,7 +6,6 @@ ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name) {
     this->energyPoints = 50;
 
     std::cout << "ScavTrap " << this->name << " is constructed by ScavTrap(const std::string &name)" << std::endl;
-	whoAmI();
 }
 
 ScavTrap::ScavTrap(const ScavTrap &st) : ClapTrap(dynamic_cast<const ClapTrap&>(st)) {
@@ -81,4 +80,12 @@ void ScavTrap::guardGate() {
         return;
     }
     std::cout << "ScavTrap " << this->name << " is now in gatekeeper mode" << std::endl;
+}
+
+std::string ScavTrap::getName() const {
+    return this->name;
+}
+
+unsigned int ScavTrap::getDamage() const {
+    return this->attackDamage;
 }

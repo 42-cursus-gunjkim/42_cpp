@@ -5,19 +5,27 @@
 #include <iostream>
 
 int main() {
-    //ClapTrap clap("Clap");
-    //ScavTrap scav("Scav");
-	//FragTrap frag("Frag");
+    ClapTrap clap("Clap");
+    ScavTrap scav("Scav");
+	FragTrap frag("Frag");
 	DiamondTrap diamond("Diamond");
 
-	//DiamondTrap another(diamond);
+	diamond.whoAmI();
 
-	//clap.whoAmI();
-	//scav.whoAmI();
-	//frag.whoAmI();
-	//diamond.whoAmI();
-	//another.whoAmI();
+	diamond.attack("Clap");
 
-    
+	ClapTrap *test = &diamond;
+	ClapTrap *test1 = new FragTrap("test1");
+	test->attack("here");
+	test1->attack(test->getName());
+	test->takeDamage(test1->getDamage());
+	test->beRepaired(3);
+
+	clap.beRepaired(30);
+
+	DiamondTrap another(diamond);
+	
+	delete test1;
+	
     return 0;
 }

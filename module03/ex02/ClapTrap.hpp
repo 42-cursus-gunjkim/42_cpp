@@ -25,8 +25,8 @@ public:
     virtual void takeDamage(unsigned int amount);
     virtual void beRepaired(unsigned int amount);
 
-    std::string getName() const;
-    unsigned int getDamage() const;
+    virtual std::string getName() const;
+    virtual unsigned int getDamage() const;
 };
 
 #endif

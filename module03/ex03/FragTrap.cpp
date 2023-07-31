@@ -6,7 +6,6 @@ FragTrap::FragTrap(const std::string &name) : ClapTrap(name) {
     this->energyPoints = 100;
 
     std::cout << "FragTrap " << this->name << " is constructed by FragTrap(const std::string &name)" << std::endl;
-	whoAmI();
 }
 
 FragTrap::FragTrap(const FragTrap &ft) : ClapTrap(dynamic_cast<const FragTrap&>(ft)) {
@@ -81,4 +80,12 @@ void FragTrap::highFivesGuys() {
         return;
     }
     std::cout << "FragTrap " << this->name << " is now in gatekeeper mode" << std::endl;
+}
+
+std::string FragTrap::getName() const {
+    return this->name;
+}
+
+unsigned int FragTrap::getDamage() const {
+    return this->attackDamage;
 }
