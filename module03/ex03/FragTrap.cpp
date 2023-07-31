@@ -79,7 +79,7 @@ void FragTrap::highFivesGuys() {
         std::cout << "FragTrap " << this->name << " has no energy... highfive failed..." << std::endl;
         return;
     }
-    std::cout << "FragTrap " << this->name << " is now in gatekeeper mode" << std::endl;
+    std::cout << "FragTrap " << this->name << " is HighFive" << std::endl;
 }
 
 std::string FragTrap::getName() const {
