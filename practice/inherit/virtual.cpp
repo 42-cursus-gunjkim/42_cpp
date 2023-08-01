@@ -4,7 +4,7 @@ class Parent {
 public:
     Parent() { std::cout << "Parent constructor" << std::endl; }
     ~Parent() { std::cout << "Parent destructor" << std::endl; }
-    //virtual void what() { std::cout << "im parent" << std::endl; }
+    virtual void what() { std::cout << "im parent" << std::endl; }
 };
 
 class Child : public Parent {
