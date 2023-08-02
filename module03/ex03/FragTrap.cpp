@@ -2,13 +2,14 @@
 #include <iostream>
 
 FragTrap::FragTrap(const std::string &name) : ClapTrap(name) {
-    this->hitPoints = 100;
-    this->energyPoints = 100;
+    this->hitPoints = this->maxHitPoints;
+    this->energyPoints = this->maxEnergyPoints;
+	this->damage = this->attackDamage;
 
     std::cout << "FragTrap " << this->name << " is constructed by FragTrap(const std::string &name)" << std::endl;
 }
 
-FragTrap::FragTrap(const FragTrap &ft) : ClapTrap(dynamic_cast<const FragTrap&>(ft)) {
+FragTrap::FragTrap(const FragTrap &ft) : ClapTrap(ft) {
     std::cout << "FragTrap " << this->name << " is constructed by FragTrap(const FragTrap &st)" << std::endl;
 }
 
@@ -16,10 +17,13 @@ FragTrap::~FragTrap() {
     std::cout << "FragTrap " << this->name << " is destroyed" << std::endl;
 }
 
-FragTrap &FragTrap::operator=(const FragTrap &st) {
-    this->name = st.name;
-    this->hitPoints = st.hitPoints;
-    this->energyPoints = st.energyPoints;
+FragTrap &FragTrap::operator=(const FragTrap &ft) {
+	if (this == &ft)
+		return *this;
+    this->name = ft.name;
+    this->hitPoints = ft.hitPoints;
+    this->energyPoints = ft.energyPoints;
+	this->damage = ft.damage;
 
     return *this;
 }
@@ -30,7 +34,7 @@ void FragTrap::attack(const std::string &target) {
         return ;
     }
     if (this->energyPoints > 0) {
-        std::cout << "FragTrap " << this->name << " attacks " << target << ", causing " << this->attackDamage << " points of damage!" << std::endl;
+        std::cout << "FragTrap " << this->name << " attacks " << target << ", causing " << this->damage << " points of damage!" << std::endl;
         this->energyPoints--;
     } else {
         std::cout << "FragTrap " << this->name << " has no energy... attack failed..." << std::endl;
@@ -87,5 +91,5 @@ std::string FragTrap::getName() const {
 }
 
 unsigned int FragTrap::getDamage() const {
-    return this->attackDamage;
+    return this->damage;
 }

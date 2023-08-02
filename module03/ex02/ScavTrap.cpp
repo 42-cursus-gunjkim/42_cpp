@@ -10,7 +10,7 @@ ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name) {
     std::cout << "ScavTrap " << this->name << " is constructed by ScavTrap(const std::string &name)" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &st) : ClapTrap(dynamic_cast<const ClapTrap&>(st)) {
+ScavTrap::ScavTrap(const ScavTrap &st) : ClapTrap(st) {
     std::cout << "ScavTrap " << this->name << " is constructed by ScavTrap(const ScavTrap &st)" << std::endl;
 }
 

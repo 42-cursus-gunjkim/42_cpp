@@ -2,13 +2,14 @@
 #include <iostream>
 
 ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name) {
-    this->hitPoints = 100;
-    this->energyPoints = 50;
+    this->hitPoints = maxHitPoints;
+    this->energyPoints = maxEnergyPoints;
+	this->damage = attackDamage;
 
     std::cout << "ScavTrap " << this->name << " is constructed by ScavTrap(const std::string &name)" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &st) : ClapTrap(dynamic_cast<const ClapTrap&>(st)) {
+ScavTrap::ScavTrap(const ScavTrap &st) : ClapTrap(st) {
     std::cout << "ScavTrap " << this->name << " is constructed by ScavTrap(const ScavTrap &st)" << std::endl;
 }
 
@@ -17,9 +18,13 @@ ScavTrap::~ScavTrap() {
 }
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &st) {
+	if (this == &st)
+		return *this;
+
     this->name = st.name;
     this->hitPoints = st.hitPoints;
     this->energyPoints = st.energyPoints;
+	this->damage = st.damage;
 
     return *this;
 }
@@ -30,7 +35,7 @@ void ScavTrap::attack(const std::string &target) {
         return ;
     }
     if (this->energyPoints > 0) {
-        std::cout << "ScavTrap " << this->name << " attacks " << target << ", causing " << this->attackDamage << " points of damage!" << std::endl;
+        std::cout << "ScavTrap " << this->name << " attacks " << target << ", causing " << this->damage << " points of damage!" << std::endl;
         this->energyPoints--;
     } else {
         std::cout << "ScavTrap " << this->name << " has no energy... attack failed..." << std::endl;
@@ -87,5 +92,5 @@ std::string ScavTrap::getName() const {
 }
 
 unsigned int ScavTrap::getDamage() const {
-    return this->attackDamage;
+    return this->damage;
 }

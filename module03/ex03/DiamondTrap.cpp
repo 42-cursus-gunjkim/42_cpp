@@ -3,12 +3,13 @@
 
 DiamondTrap::DiamondTrap(const std::string &name) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name) {
 	this->name = name;
-	this->hitPoints = FragTrap::maxHitPoints;
-	this->energyPoints = ScavTrap::maxEnergyPoints;
+	this->hitPoints = maxHitPoints;
+	this->energyPoints = maxEnergyPoints;
+	this->damage = attackDamage;
 	std::cout << "DiamondTrap " << this->name << " is constructed by DiamondTrap(const std::string &name)" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap &dt) : ClapTrap(dynamic_cast<const ClapTrap&>(dt)), ScavTrap(dynamic_cast<const ScavTrap&>(dt)), FragTrap(dynamic_cast<const FragTrap&>(dt)) {
+DiamondTrap::DiamondTrap(const DiamondTrap &dt) : ClapTrap(dt), ScavTrap(dt), FragTrap(dt) {
 	std::cout << "DiamondTrap " << this->name << " is constructed by DiamondTrap(const DiamondTrap &dt)" << std::endl;
 }
 
@@ -37,5 +38,5 @@ std::string DiamondTrap::getName() const {
 }
 
 unsigned int DiamondTrap::getDamage() const {
-    return this->attackDamage;
+    return this->damage;
 }

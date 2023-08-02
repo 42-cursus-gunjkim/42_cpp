@@ -10,7 +10,7 @@ FragTrap::FragTrap(const std::string &name) : ClapTrap(name) {
     std::cout << "FragTrap " << this->name << " is constructed by FragTrap(const std::string &name)" << std::endl;
 }
 
-FragTrap::FragTrap(const FragTrap &ft) : ClapTrap(dynamic_cast<const FragTrap&>(ft)) {
+FragTrap::FragTrap(const FragTrap &ft) : ClapTrap(ft) {
     std::cout << "FragTrap " << this->name << " is constructed by FragTrap(const FragTrap &st)" << std::endl;
 }
 
@@ -18,11 +18,11 @@ FragTrap::~FragTrap() {
     std::cout << "FragTrap " << this->name << " is destroyed" << std::endl;
 }
 
-FragTrap &FragTrap::operator=(const FragTrap &st) {
-    this->name = st.name;
-    this->hitPoints = st.hitPoints;
-    this->energyPoints = st.energyPoints;
-    this->attackDamage = st.attackDamage;
+FragTrap &FragTrap::operator=(const FragTrap &ft) {
+    this->name = ft.name;
+    this->hitPoints = ft.hitPoints;
+    this->energyPoints = ft.energyPoints;
+    this->attackDamage = ft.attackDamage;
 
     return *this;
 }
