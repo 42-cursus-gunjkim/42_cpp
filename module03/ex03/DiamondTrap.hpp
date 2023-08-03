@@ -19,6 +19,7 @@ public:
     DiamondTrap(const std::string &name);
     DiamondTrap(const DiamondTrap &dt);
     virtual ~DiamondTrap();
+    DiamondTrap &operator=(const DiamondTrap &dt);
     virtual void attack(const std::string &target);
     virtual void takeDamage(unsigned int amount);
     virtual void beRepaired(unsigned int amount);

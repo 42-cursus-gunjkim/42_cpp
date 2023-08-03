@@ -10,7 +10,7 @@ FragTrap::FragTrap(const std::string &name) : ClapTrap(name) {
 }
 
 FragTrap::FragTrap(const FragTrap &ft) : ClapTrap(ft) {
-    std::cout << "FragTrap " << this->name << " is constructed by FragTrap(const FragTrap &st)" << std::endl;
+    std::cout << "FragTrap " << this->name << " is constructed by FragTrap(const FragTrap &ft)" << std::endl;
 }
 
 FragTrap::~FragTrap() {
