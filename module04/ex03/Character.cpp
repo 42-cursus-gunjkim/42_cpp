@@ -31,7 +31,7 @@ Character &Character::operator=(const Character &c) {
 		return *this;
 	this->name = c.name;
 	for (int i = 0; i < 4; i++) {
-		delete this->inventory[i];
+		delete this->inventory[i];//delete 될때 world에 있는 얘는 어떻게 처리해야하나
 		this->inventory[i] = NULL;
 		if (c.inventory[i])
 			this->inventory[i] = c.inventory[i]->clone();
@@ -68,3 +68,8 @@ void Character::use(int idx, ICharacter &target) {
 	inventory[idx]->use(target);
 }
 
+AMateria *Character::getMateriaIdx(int idx) {
+	if (idx < 0 || idx > 3)
+		return NULL;
+	return inventory[idx];
+}

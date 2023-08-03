@@ -6,7 +6,7 @@
 #include "ICharacter.hpp"
 #include "AMateria.hpp"
 
-class Character : public ICharacter{
+class Character : public ICharacter {
 	private:
 		std::string name;
 		AMateria *inventory[4];
@@ -20,6 +20,7 @@ class Character : public ICharacter{
 		virtual void equip(AMateria* m);
 		virtual void unequip(int idx);
 		virtual void use(int idx, ICharacter& target);
+		virtual AMateria *getMateriaIdx(int idx);
 };
 
 #endif
