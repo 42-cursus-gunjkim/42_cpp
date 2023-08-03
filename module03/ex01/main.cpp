@@ -14,6 +14,7 @@ int main() {
 
     john.attack(nick.getName());
     nick.takeDamage(john.getDamage());
+    john.guardGate();
     
     return 0;
 }
