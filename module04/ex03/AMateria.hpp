@@ -6,8 +6,12 @@
 
 class ICharacter;
 
+#define EQUIP true
+#define UNEQUIP false
+
 class AMateria {
 	protected:
+		bool isEquip;
 		std::string type;
 		AMateria() {}
 	public:
@@ -18,6 +22,8 @@ class AMateria {
 		AMateria &operator=(const AMateria &a);
 
 		std::string const &getType() const;
+		virtual void setStatusEquip(bool e);
+		virtual bool getStatusEquip();
 		virtual AMateria *clone() const = 0;
 		virtual void use(ICharacter &target);
 };

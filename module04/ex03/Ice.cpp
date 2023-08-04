@@ -1,22 +1,17 @@
 #include "Ice.hpp"
 #include <iostream>
 
-Ice::Ice() : AMateria("ice") {
-	std::cout << "Ice default constructor called" << std::endl;
-}
+Ice::Ice() : AMateria("ice") {}
 
-Ice::Ice(const Ice &i) : AMateria(i) {
-	std::cout << "Ice copy constructor called" << std::endl;
-}
+Ice::Ice(const Ice &i) : AMateria(i) {}
 
-Ice::~Ice() {
-	std::cout << "Ice destructor called" << std::endl;
-}
+Ice::~Ice() {}
 
 Ice &Ice::operator=(const Ice &i) {
 	if (this == &i)
 		return *this;
-	*this = i;
+	this->type = i.type;
+	this->isEquip = i.isEquip;
 	return *this;
 }
 

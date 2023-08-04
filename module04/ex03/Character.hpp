@@ -16,11 +16,11 @@ class Character : public ICharacter {
 		Character(const Character &c);
 		virtual ~Character();
 		Character &operator=(const Character &c);
-		virtual std::string const & getName() const;
 		virtual void equip(AMateria* m);
 		virtual void unequip(int idx);
 		virtual void use(int idx, ICharacter& target);
-		virtual AMateria *getMateriaIdx(int idx);
+		virtual AMateria *getMateriaByIdx(int idx);
+		virtual std::string const &getName() const;
 };
 
 #endif

@@ -4,18 +4,18 @@
 Character::Character(std::string const &name) : name(name) {
 	for (int i = 0; i < 4; i++)
 		inventory[i] = NULL;
-	std::cout << "Character " << this->name << " created by Character default constructor" << std::endl;	
 }
 
 Character::Character(const Character &c) {
 	this->name = c.name;
+
+	// deep copy
 	for (int i = 0; i < 4; i++) {
 		if (c.inventory[i])
 			this->inventory[i] = c.inventory[i]->clone();
 		else
 			this->inventory[i] = NULL;
 	}
-	std::cout << "Character " << this->name << " created by Character copy constructor" << std::endl;
 }
 
 Character::~Character() {
@@ -23,7 +23,6 @@ Character::~Character() {
 		if (this->inventory[i])
 			delete this->inventory[i];
 	}
-	std::cout << "Character " << this->name << " destroyed by Character destructor" << std::endl;
 }
 
 Character &Character::operator=(const Character &c) {
@@ -31,8 +30,8 @@ Character &Character::operator=(const Character &c) {
 		return *this;
 	this->name = c.name;
 	for (int i = 0; i < 4; i++) {
-		delete this->inventory[i];//delete 될때 world에 있는 얘는 어떻게 처리해야하나
-		this->inventory[i] = NULL;
+		if (this->inventory[i] != NULL)
+			delete this->inventory[i];
 		if (c.inventory[i])
 			this->inventory[i] = c.inventory[i]->clone();
 		else
@@ -41,15 +40,12 @@ Character &Character::operator=(const Character &c) {
 	return *this;
 }
 
-std::string const &Character::getName() const {
-	return this->name;
-}
-
 void Character::equip(AMateria *m) {
 	for (int i = 0; i < 4; i++) {
 		if (this->inventory[i] == NULL) {
+			m->setStatusEquip(EQUIP);
 			this->inventory[i] = m;
-			return ;
+			return;
 		}
 	}
 }
@@ -57,19 +53,22 @@ void Character::equip(AMateria *m) {
 void Character::unequip(int idx) {
 	if (idx < 0 || idx > 3)
 		return ;
+	this->inventory[idx]->setStatusEquip(UNEQUIP);
 	this->inventory[idx] = NULL;
 }
 
 void Character::use(int idx, ICharacter &target) {
-	if (idx < 0 || idx > 3)
-		return ;
-	if (this->inventory[idx] == NULL)
+	if (idx < 0 || idx > 3 || this->inventory[idx] == NULL)
 		return ;
 	inventory[idx]->use(target);
 }
 
-AMateria *Character::getMateriaIdx(int idx) {
+AMateria *Character::getMateriaByIdx(int idx) {
 	if (idx < 0 || idx > 3)
 		return NULL;
 	return inventory[idx];
+}
+
+std::string const &Character::getName() const {
+	return this->name;
 }

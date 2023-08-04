@@ -23,7 +23,7 @@ World::World(const World &r) {
 
 World::~World() {
     for (int i = 0; i < capacity; i++) {
-        if (world[i] != NULL)
+        if (world[i] != NULL && world[i]->getStatusEquip() == UNEQUIP)
             delete world[i];
     }
     delete world;
@@ -80,9 +80,9 @@ void World::setMateria(AMateria *m) {
 AMateria *World::getMateria(const std::string &type) {
     for (int i = 0; i < this->capacity; i++) {
         if (this->world[i] != NULL && this->world[i]->getType() == type) {
-             AMateria *ret = this->world[i];
-             this->world[i] = NULL;
-             return ret;
+            //AMateria *ret = this->world[i];
+            //this->world[i] = NULL;
+            return this->world[i];
         }
     }
     return NULL;

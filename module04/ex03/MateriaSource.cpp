@@ -4,7 +4,6 @@
 MateriaSource::MateriaSource() {
 	for (int i = 0; i < 4; i++)
 		this->memory[i] = NULL;
-	std::cout << "MateriaSource default constructor called" << std::endl;
 }
 
 MateriaSource::MateriaSource(const MateriaSource &ms) {
@@ -14,7 +13,6 @@ MateriaSource::MateriaSource(const MateriaSource &ms) {
 		else
 			this->memory[i] = NULL;
 	}
-	std::cout << "MateriaSource copy constructor called" << std::endl;
 }
 
 MateriaSource::~MateriaSource() {
@@ -22,7 +20,6 @@ MateriaSource::~MateriaSource() {
 		if (this->memory[i])
 			delete this->memory[i];
 	}
-	std::cout << "MateriaSource destructor called" << std::endl;
 }
 
 MateriaSource &MateriaSource::operator=(const MateriaSource &ms) {

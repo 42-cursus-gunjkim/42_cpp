@@ -3,22 +3,21 @@
 
 AMateria::AMateria(const std::string &type) {
 	this->type = type;
-	std::cout << "AMateria default constructor called" << std::endl;	
+	this->isEquip = UNEQUIP;
 }
 
 AMateria::AMateria(const AMateria &a) {
 	this->type = a.type;
-	std::cout << "AMateria copy constructor called" << std::endl;
+	this->isEquip = a.isEquip;
 }
 
-AMateria::~AMateria() {
-	std::cout << "AMateria destructor called" << std::endl;
-}
+AMateria::~AMateria() {}
 
 AMateria &AMateria::operator=(const AMateria &a) {
 	if (this == &a)
 		return *this;
 	this->type = a.type;
+	this->isEquip = a.isEquip;
 	return *this;
 }
 
@@ -30,4 +29,10 @@ void AMateria::use(ICharacter &target) {
 	std::cout << "AMateria's use function called... this should not happen..." << std::endl;
 }
 
+void AMateria::setStatusEquip(bool e) {
+	this->isEquip = e;
+}
 
+bool AMateria::getStatusEquip() {
+	return this->isEquip;
+}

@@ -5,6 +5,7 @@
 #include "MateriaSource.hpp"
 #include "World.hpp"
 #include <cstdlib>
+#include <iostream>
 
 void checkLeak()
 {
@@ -23,16 +24,17 @@ int main()
 	me->equip(world.getMateria("ice"));
 	world.setMateria(src->createMateria("cure"));
 	me->equip(world.getMateria("cure"));
-	world.setMateria(me->getMateriaIdx(0));
-	me->unequip(0);
-	world.setMateria(me->getMateriaIdx(1));
 	me->unequip(1);
 	ICharacter* bob = new Character("bob");
 	me->use(0, *bob);
 	me->use(1, *bob);
+	std::cout << "1" << std::endl;
 	delete bob;
+	std::cout << "2" << std::endl;
 	delete me;
+	std::cout << "3" << std::endl;
 	delete src;
+	std::cout << "4" << std::endl;
 	atexit(checkLeak);
 	return 0;
 }
