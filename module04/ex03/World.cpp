@@ -23,7 +23,7 @@ World::World(const World &r) {
 
 World::~World() {
     for (int i = 0; i < capacity; i++) {
-        if (world[i] != NULL && world[i]->getStatusEquip() == UNEQUIP)
+        if (world[i] != NULL)
             delete world[i];
     }
     delete world;
@@ -33,14 +33,18 @@ World &World::operator=(const World &r) {
     if (this == &r)
         return *this;
 
-    for (int i = 0; i < this->len; i++)
-        delete world[i];
+    for (int i = 0; i < this->capacity; i++) {
+		if (this->world[i] != NULL) {
+			delete this->world[i];
+			this->world[i] = NULL;
+		}
+	}
     delete world;
 
+	this->world = new AMateria*[r.capacity];
     this->len = r.len;
     this->capacity = r.capacity;
 
-    this->world = new AMateria*[r.capacity];
     for (int i = 0; i < r.capacity; i++) {
         if (r.world[i] != NULL)
             this->world[i] = r.world[i]->clone();
@@ -51,6 +55,8 @@ World &World::operator=(const World &r) {
 }
 
 void World::setMateria(AMateria *m) {
+	if (m == NULL)
+		return;
     if (this->len >= this->capacity) {
         this->capacity *= 2;
         AMateria **newWorld = new AMateria*[this->capacity];
@@ -77,13 +83,17 @@ void World::setMateria(AMateria *m) {
     }
 }
 
-AMateria *World::getMateria(const std::string &type) {
-    for (int i = 0; i < this->capacity; i++) {
-        if (this->world[i] != NULL && this->world[i]->getType() == type) {
-            //AMateria *ret = this->world[i];
-            //this->world[i] = NULL;
-            return this->world[i];
-        }
-    }
-    return NULL;
+AMateria *World::getMateria(int idx) {
+    if (idx < 0 || idx > this->capacity)
+		return NULL;
+	return this->world[idx];
+}
+
+void World::validateMateria(int idx) {
+	if (idx < 0 || idx > this->capacity)
+		return;
+	if (this->world[idx] != NULL && this->world[idx]->getStatusEquip() == EQUIP) {
+		this->world[idx] = NULL;
+		return;
+	}
 }

@@ -17,7 +17,8 @@ class World {
         ~World();
         World &operator=(const World &w);
         void setMateria(AMateria *m);
-        AMateria *getMateria(const std::string &type);
+        AMateria *getMateria(int idx);
+		void validateMateria(int idx);
 };
 
 #endif

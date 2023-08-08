@@ -41,8 +41,10 @@ Character &Character::operator=(const Character &c) {
 }
 
 void Character::equip(AMateria *m) {
+	if (m == NULL)
+		return;
 	for (int i = 0; i < 4; i++) {
-		if (this->inventory[i] == NULL) {
+		if (this->inventory[i] == NULL && m->getStatusEquip() == UNEQUIP) {
 			m->setStatusEquip(EQUIP);
 			this->inventory[i] = m;
 			return;
@@ -53,8 +55,10 @@ void Character::equip(AMateria *m) {
 void Character::unequip(int idx) {
 	if (idx < 0 || idx > 3)
 		return ;
-	this->inventory[idx]->setStatusEquip(UNEQUIP);
-	this->inventory[idx] = NULL;
+	if (this->inventory[idx] != NULL) {
+		this->inventory[idx]->setStatusEquip(UNEQUIP);
+		this->inventory[idx] = NULL;
+	}
 }
 
 void Character::use(int idx, ICharacter &target) {
