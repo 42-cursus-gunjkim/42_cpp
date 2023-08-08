@@ -12,6 +12,9 @@ SRCS= main.cpp \
 
 OBJS= $(SRCS:.cpp=.o)
 
+%.o: %.cpp
+	$(CXX) $(CFLAGS) -c $< -o $@
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
