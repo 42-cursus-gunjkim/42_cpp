@@ -30,6 +30,10 @@ void Cat::makeSound() const {
 	std::cout << "Maybe Meow Sound..." << std::endl;
 }
 
-std::string Cat::getType() const {
-	return this->type;
+void Cat::setIdea(int idx, const std::string &idea) {
+	brain->setIdea(idx, idea);
+}
+
+std::string Cat::getIdea(int idx) {
+	return brain->getIdea(idx);
 }

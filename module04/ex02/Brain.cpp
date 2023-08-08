@@ -22,3 +22,11 @@ Brain &Brain::operator=(const Brain &b) {
 		this->ideas[i] = b.ideas[i];
 	return *this;
 }
+
+void Brain::setIdea(int idx, const std::string &idea) {
+	this->ideas[idx] = idea;
+}
+
+std::string Brain::getIdea(int idx) {
+	return this->ideas[idx];
+}

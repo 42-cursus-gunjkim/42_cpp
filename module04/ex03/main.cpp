@@ -4,13 +4,14 @@
 #include "Character.hpp"
 #include "MateriaSource.hpp"
 #include "World.hpp"
-#include <cstdlib>
 #include <iostream>
 
-void checkLeak()
-{
-	system("leaks ex03");
-}
+//#include <cstdlib>
+
+//void checkLeak()
+//{
+//	system("leaks ex03");
+//}
 
 void equipAndValidate(int idx, World &world, ICharacter *me) {
 	me->equip(world.getMateria(idx));
@@ -123,6 +124,6 @@ int main()
 	delete bob;
 	delete me;
 	delete src;
-	atexit(checkLeak);
+	//atexit(checkLeak);
 	return 0;
 }

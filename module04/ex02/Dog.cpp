@@ -30,6 +30,10 @@ void Dog::makeSound() const {
 	std::cout << "Maybe Barking Sound..." << std::endl;
 }
 
-std::string Dog::getType() const {
-	return this->type;
+void Dog::setIdea(int idx, const std::string &idea) {
+	brain->setIdea(idx, idea);
+}
+
+std::string Dog::getIdea(int idx) {
+	return brain->getIdea(idx);
 }
