@@ -1,4 +1,5 @@
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
 #include <iostream>
 
 AMateria::AMateria(const std::string &type) {
@@ -26,7 +27,7 @@ std::string const &AMateria::getType() const {
 }
 
 void AMateria::use(ICharacter &target) {
-	std::cout << "AMateria's use function called... this should not happen..." << std::endl;
+	std::cout << "AMateria's use function called to " << target.getName() <<  "... this should not happen..." << std::endl;
 }
 
 void AMateria::setStatusEquip(bool e) {

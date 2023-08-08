@@ -117,9 +117,9 @@ int main()
 	//equipAndUnequip(world, me, bob);
 	//doubleEquip(world, me, bob);
 
-	basicTest(me, bob, src);
+	//basicTest(me, bob, src);
 
-	//commonTest(world, me, bob);
+	commonTest(world, me, bob);
 
 	delete bob;
 	delete me;
