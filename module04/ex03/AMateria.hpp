@@ -22,8 +22,8 @@ class AMateria {
 		AMateria &operator=(const AMateria &a);
 
 		std::string const &getType() const;
-		virtual void setStatusEquip(bool e);
-		virtual bool getStatusEquip();
+		void setStatusEquip(bool e);
+		bool getStatusEquip();
 		virtual AMateria *clone() const = 0;
 		virtual void use(ICharacter &target);
 };

@@ -24,9 +24,17 @@ Brain &Brain::operator=(const Brain &b) {
 }
 
 void Brain::setIdea(int idx, const std::string &idea) {
+	if (idx < 0 || idx >= 100) {
+		std::cout << "wrong index... idx is between 0 and 100" << std::endl;
+		return;
+	}
 	this->ideas[idx] = idea;
 }
 
-std::string Brain::getIdea(int idx) {
+const std::string &Brain::getIdea(int idx) const {
+	if (idx < 0 || idx >= 100) {
+		std::cout << "wrong index... idx is between 0 and 100" << std::endl;
+		return this->ideas[0];
+	}
 	return this->ideas[idx];
 }

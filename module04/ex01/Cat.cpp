@@ -3,13 +3,14 @@
 
 Cat::Cat() : Animal() {
 	this->type = "Cat";
-	brain = new Brain();
+	this->brain = new Brain();
 	std::cout << "Cat default constructor called" << std::endl;
 }
 
 Cat::Cat(const Cat &c) : Animal() {
 	this->type = c.type;
-	*brain = *(c.brain);
+	this->brain = new Brain();
+	*(this->brain) = *(c.brain);
 	std::cout << "Cat copy constructor called" << std::endl; 
 }
 
@@ -22,7 +23,7 @@ Cat &Cat::operator=(const Cat &c) {
 	if (this == &c)
 		return (*this);
 	this->type = c.type;
-	*brain = *(c.brain);
+	*(this->brain) = *(c.brain);
 	return (*this);
 }
 
@@ -34,6 +35,6 @@ void Cat::setIdea(int idx, const std::string &idea) {
 	brain->setIdea(idx, idea);
 }
 
-std::string Cat::getIdea(int idx) {
+const std::string &Cat::getIdea(int idx) const {
 	return brain->getIdea(idx);
 }

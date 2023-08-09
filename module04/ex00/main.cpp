@@ -5,6 +5,12 @@
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
+// #include <cstdlib>
+
+// void checkLeak()
+// {
+// 	system("leaks ex00");
+// }
 
 int main()
 {
@@ -41,5 +47,7 @@ int main()
 	delete i;
 	delete wrongMeta;
 	delete wrongJ;
+
+	//atexit(checkLeak);
 	return 0;
 }

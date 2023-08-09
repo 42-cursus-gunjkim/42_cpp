@@ -6,12 +6,12 @@
 #include "World.hpp"
 #include <iostream>
 
-//#include <cstdlib>
+// #include <cstdlib>
 
-//void checkLeak()
-//{
-//	system("leaks ex03");
-//}
+// void checkLeak()
+// {
+// 	system("leaks ex03");
+// }
 
 void equipAndValidate(int idx, World &world, ICharacter *me) {
 	me->equip(world.getMateria(idx));

@@ -3,7 +3,7 @@
 
 Animal::Animal() {
 	this->type = "Animal";
-	std::cout << "Animal default constructor called" << std::endl;	
+	std::cout << "Animal default constructor called" << std::endl;
 }
 
 Animal::Animal(const Animal &a) {
@@ -26,6 +26,6 @@ void Animal::makeSound() const {
 	std::cout << "Maybe Strange Animal Sounds....?" << std::endl;
 }
 
-std::string Animal::getType() const {
+const std::string &Animal::getType() const {
 	return this->type;
 }
