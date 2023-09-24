@@ -1,6 +1,6 @@
 #pragma once
-#ifndef FORM_HPP
-#define FORM_HPP
+#ifndef AFORM_HPP
+#define AFORM_HPP
 
 #include <string>
 #include <iostream>
@@ -21,14 +21,15 @@ class Form
 	public:
 		Form(const std::string& name);
 		Form(const std::string& name, int signable, int executable);
-		~Form();
+		virtual ~Form();
 		Form(const Form& f);
-		Form& operator=(const Form& f);
+		const Form& operator=(const Form& f);
 		std::string getName() const;
 		bool getIsSigned() const;
 		int getSignable() const;
 		int getExecutable() const;
 		void beSigned(const Bureaucrat& b);
+		virtual void execute(Bureaucrat const& executor) const = 0;
 
 	public:
 		class GradeTooHighException : public std::exception
@@ -47,6 +48,14 @@ class Form
 			public:
 				GradeTooLowException();
 				GradeTooLowException(const char* err_msg);
+				const char* what() const throw();
+		};
+		class FormNotSignedException : public std::exception
+		{
+			private:
+				const char* err_msg_;
+			public:
+				FormNotSignedException();
 				const char* what() const throw();
 		};
 };

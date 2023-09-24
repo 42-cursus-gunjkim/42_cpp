@@ -1,4 +1,4 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Form::Form(const std::string& name)
 	: name_(name)
@@ -26,7 +26,7 @@ Form::Form(const Form& f)
 
 Form::~Form() {}
 
-Form& Form::operator=(const Form& f)
+const Form& Form::operator=(const Form& f)
 {
 	if (this == &f)
 		return *this;
@@ -82,6 +82,15 @@ const char* Form::GradeTooHighException::what() const throw()
 }
 
 const char* Form::GradeTooLowException::what() const throw()
+{
+	return this->err_msg_;
+}
+
+Form::FormNotSignedException::FormNotSignedException()
+	: err_msg_("Form::FormNotSignedException : Form have to be signed before exec!")
+	{}
+
+const char* Form::FormNotSignedException::what() const throw()
 {
 	return this->err_msg_;
 }
