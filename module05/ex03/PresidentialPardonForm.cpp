@@ -1,7 +1,7 @@
 #include "PresidentialPardonForm.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string& target)
-	: Form("PresidentialPardonForm", min_required_grade_to_sign, min_required_grade_to_exec)
+	: Form("PresidentialPardonFrom", min_required_grade_to_sign, min_required_grade_to_exec)
 	, target_(target)
 	{}
 

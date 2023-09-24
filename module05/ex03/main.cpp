@@ -17,7 +17,6 @@ int main()
 		gunjoong.executeForm(*r);
 		gunjoong.signForm(*p);
 		gunjoong.executeForm(*p);
-		std::cout << *p << std::endl;
 		delete s;
 		delete r;
 		delete p;
