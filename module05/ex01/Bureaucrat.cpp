@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : name_(name)
 {
@@ -48,6 +49,24 @@ void Bureaucrat::decrease()
 	if (grade_ == lowest_grade_)
 		throw GradeTooLowException("Bureaucrat::GradeTooLowException : Too low to decrease!");
 	this->grade_++;
+}
+
+void Bureaucrat::signForm(Form& f)
+{
+	try
+	{
+		f.beSigned(*this);
+	}
+	catch (std::exception& e)
+	{
+		std::cout 
+		<< this->name_ 
+		<< " couldn't sign " << f.getName() 
+		<< " because " << e.what() << std::endl;
+		return;
+ 	}
+	std::cout << this->name_ 
+	<< " signed " << f.getName() << std::endl; 
 }
 
 Bureaucrat::GradeTooHighException::GradeTooHighException()

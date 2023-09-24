@@ -1,13 +1,17 @@
 #include "Bureaucrat.hpp"
 
-void check_leak() {
+void checkLeak()
+{
 	system("leaks ex00");
 }
 
-int main() {
-	try {
+int main()
+{
+	try
+	{
 		Bureaucrat("what", 151);
-	} catch (std::exception& e) {
+	} catch (std::exception& e)
+	{
 		std::cout << e.what() << std::endl;
 	}
 
@@ -19,12 +23,14 @@ int main() {
 	gunjoong.decrease();
 	std::cout << gunjoong << std::endl;
 
-	Bureaucrat kim = Bureaucrat("kim", 1);
-	try {
-		kim.increase();
-	} catch (std::exception& e) {
+	try
+	{
+		Bureaucrat kim = Bureaucrat("kim", 151);
+		kim.decrease();
+	} catch (std::exception& e)
+	{
 		std::cout << e.what() << std::endl;
 	}
-	atexit(check_leak);
+	atexit(checkLeak);
 	return 0;
 }
