@@ -1,12 +1,12 @@
 #include "AForm.hpp"
 
-Form::Form(const std::string& name)
+AForm::AForm(const std::string& name)
 	: name_(name)
 	, is_signed_(false)
 	, signable_(lowest_grade_)
 	, executable_(lowest_grade_) {}
 
-Form::Form(const std::string& name, int signable, int executable)
+AForm::AForm(const std::string& name, int signable, int executable)
 	: name_(name)
 	, is_signed_(false)
 	, signable_(signable)
@@ -18,15 +18,15 @@ Form::Form(const std::string& name, int signable, int executable)
 		throw GradeTooLowException();
 }
 
-Form::Form(const Form& f)
+AForm::AForm(const AForm& f)
 	: name_(f.name_)
 	, is_signed_(f.is_signed_)
 	, signable_(f.signable_)
 	, executable_(f.executable_) {}
 
-Form::~Form() {}
+AForm::~AForm() {}
 
-const Form& Form::operator=(const Form& f)
+const AForm& AForm::operator=(const AForm& f)
 {
 	if (this == &f)
 		return *this;
@@ -37,65 +37,65 @@ const Form& Form::operator=(const Form& f)
 	return *this;
 }
 
-std::string Form::getName() const
+std::string AForm::getName() const
 {
 	return this->name_;
 }
 
-bool Form::getIsSigned() const
+bool AForm::getIsSigned() const
 {
 	return this->is_signed_;
 }
 
-int Form::getSignable() const
+int AForm::getSignable() const
 {
 	return this->signable_;
 }
 
-int Form::getExecutable() const
+int AForm::getExecutable() const
 {
 	return this->executable_;
 }
 
-void Form::beSigned(const Bureaucrat& b)
+void AForm::beSigned(const Bureaucrat& b)
 {
 	if (this->signable_ < b.getGrade())
 		throw GradeTooLowException("Form::GradeTooLowException : Grade is too low to sign!");
 	this->is_signed_ = true;
 }
 
-Form::GradeTooHighException::GradeTooHighException()
+AForm::GradeTooHighException::GradeTooHighException()
 	: err_msg_("Form::GradeTooHighException : Highest : 1, Lowest : 150") {}
 
-Form::GradeTooHighException::GradeTooHighException(const char* err_msg)
+AForm::GradeTooHighException::GradeTooHighException(const char* err_msg)
 	: err_msg_(err_msg) {}
 
-Form::GradeTooLowException::GradeTooLowException()
+AForm::GradeTooLowException::GradeTooLowException()
 	: err_msg_("Form::GradeTooLowException : Highest : 1, Lowest : 150") {}
 
-Form::GradeTooLowException::GradeTooLowException(const char* err_msg)
+AForm::GradeTooLowException::GradeTooLowException(const char* err_msg)
 	: err_msg_(err_msg) {}
 
-const char* Form::GradeTooHighException::what() const throw()
+const char* AForm::GradeTooHighException::what() const throw()
 {
 	return this->err_msg_;
 }
 
-const char* Form::GradeTooLowException::what() const throw()
+const char* AForm::GradeTooLowException::what() const throw()
 {
 	return this->err_msg_;
 }
 
-Form::FormNotSignedException::FormNotSignedException()
+AForm::FormNotSignedException::FormNotSignedException()
 	: err_msg_("Form::FormNotSignedException : Form have to be signed before exec!")
 	{}
 
-const char* Form::FormNotSignedException::what() const throw()
+const char* AForm::FormNotSignedException::what() const throw()
 {
 	return this->err_msg_;
 }
 
-std::ostream& operator<<(std::ostream& out, const Form& f)
+std::ostream& operator<<(std::ostream& out, const AForm& f)
 {
 	out
 	<< "Form : " << f.getName() << std::endl

@@ -8,19 +8,20 @@
 
 class Intern
 {
-	typedef Form* (Intern::*maker)(const std::string &);
+	typedef AForm* (Intern::*maker)(const std::string &);
 
 	private:
 		maker makers_[3];
+
 	public:
 		Intern();
 		~Intern() {}
 		Intern(const Intern& i);
-		Intern& operator=(const Intern& i) {}
-		Form* makeForm(const std::string &name, const std::string &target);
-		Form* makeShrubbery(const std::string &target);
-		Form* makeRobotomy(const std::string &target);
-		Form* makePresidential(const std::string &target);
+		Intern& operator=(const Intern& i);
+		AForm* makeForm(const std::string &name, const std::string &target);
+		AForm* makeShrubbery(const std::string &target);
+		AForm* makeRobotomy(const std::string &target);
+		AForm* makePresidential(const std::string &target);
 	
 	public:
 		class TypeDoesNotExist : public std::exception

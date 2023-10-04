@@ -3,12 +3,12 @@
 #include <ctime>
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
-	: Form("RobotomyRequestForm", min_required_grade_to_sign, min_required_grade_to_exec)
+	: AForm("RobotomyRequestForm", min_required_grade_to_sign, min_required_grade_to_exec)
 	, target_(target)
 	{}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& r)
-	: Form(r.getName(), r.getSignable(), r.getExecutable())
+	: AForm(r.getName(), r.getSignable(), r.getExecutable())
 	, target_(r.target_)
 	{}
 
@@ -18,7 +18,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& r
 {
 	if (this == &r)
 		return (*this);
-	dynamic_cast<Form&>(*this) = r;
+	dynamic_cast<AForm&>(*this) = r;
 	this->target_ = r.target_;
 	return (*this);
 }

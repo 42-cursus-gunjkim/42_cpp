@@ -4,7 +4,7 @@
 
 #include "AForm.hpp"
 
-class ShrubberyCreationForm : public Form
+class ShrubberyCreationForm : public AForm
 {
 	private:
 		static const int min_required_grade_to_sign = 145;

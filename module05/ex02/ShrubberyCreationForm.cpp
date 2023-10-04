@@ -2,12 +2,12 @@
 #include <fstream>
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
-	: Form("ShrubberyCreationForm", min_required_grade_to_sign, min_required_grade_to_exec)
+	: AForm("ShrubberyCreationForm", min_required_grade_to_sign, min_required_grade_to_exec)
 	, target_(target)
 	{}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& s)
-	: Form(s.getName(), s.getSignable(), s.getExecutable())
+	: AForm(s.getName(), s.getSignable(), s.getExecutable())
 	, target_(s.target_)
 	{}
 
@@ -17,7 +17,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 {
 	if (this == &s)
 		return (*this);
-	dynamic_cast<Form&>(*this) = s;
+	dynamic_cast<AForm&>(*this) = s;
 	this->target_ = s.target_;
 	return (*this);
 }

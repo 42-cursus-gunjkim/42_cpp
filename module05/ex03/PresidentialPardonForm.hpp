@@ -4,7 +4,7 @@
 
 #include "AForm.hpp"
 
-class PresidentialPardonForm : public Form
+class PresidentialPardonForm : public AForm
 {
 	private:
 		static const int min_required_grade_to_sign = 25;

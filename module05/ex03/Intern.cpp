@@ -2,74 +2,68 @@
 
 Intern::Intern()
 {
-	makers_[0] = Intern::makeShrubbery;
-	makers_[1] = Intern::makeRobotomy;
-	makers_[2] = Intern::makePresidential;
+	this->makers_[0] = &Intern::makeShrubbery;
+	this->makers_[1] = &Intern::makeRobotomy;
+	this->makers_[2] = &Intern::makePresidential;
 }
 
 Intern::Intern(const Intern& i)
 {
-	makers_[0] = i.makers_[0];
-	makers_[1] = i.makers_[1];
-	makers_[2] = i.makers_[2];
+	this->makers_[0] = i.makers_[0];
+	this->makers_[1] = i.makers_[1];
+	this->makers_[2] = i.makers_[2];
 }
 
-Form* Intern::makeShrubbery(const std::string& target)
+Intern& Intern::operator=(const Intern& i)
 {
-	Form* f;
-
-	try
-	{
-		f = new ShrubberyCreationForm(target);
-	}
-	catch (std::exception& e)
-	{
-		throw e;
-	}
+	if (this == &i)
+		return *this;
+	this->makers_[0] = i.makers_[0];
+	this->makers_[1] = i.makers_[1];
+	this->makers_[2] = i.makers_[2];
+	return *this;
 }
 
-Form* Intern::makeRobotomy(const std::string& target)
+AForm* Intern::makeShrubbery(const std::string& target)
 {
-	Form* f;
+	AForm* f;
 
-	try
-	{
-		f = new RobotomyRequestForm(target);
-	}
-	catch (std::exception& e)
-	{
-		throw e;
-	}
+	f = new ShrubberyCreationForm(target);
+	return f;
 }
 
-Form* Intern::makePresidential(const std::string& target)
+AForm* Intern::makeRobotomy(const std::string& target)
 {
-	Form* f;
+	AForm* f;
 
-	try
-	{
-		f = new PresidentialPardonForm(target);
-	}
-	catch (std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	std::cout << "Intern creates "
+	f = new RobotomyRequestForm(target);
+	return f;
 }
 
-Form* Intern::makeForm(const std::string &name, const std::string &target)
+AForm* Intern::makePresidential(const std::string& target)
+{
+	AForm* f;
+
+	f = new PresidentialPardonForm(target);
+	return f;
+}
+
+AForm* Intern::makeForm(const std::string &name, const std::string &target)
 {
 	std::string names[3] = {"shrubbery create", "robotomy request", "presidential pardon"};
-	Form *f;
+	AForm *f;
 
 	int i;
 	for (i = 0; i < 3; i++)
 	{
-		if (names[0].compare(name))
+		if (names[i] == name)
 			break;
 	}
-	if ()
+	if (i == 3)
+		throw TypeDoesNotExist();
 	f = (this->*makers_[i])(target);
+	std::cout << "Intern creates " << f->getName() << std::endl;
+	return f;
 }
 
 Intern::TypeDoesNotExist::TypeDoesNotExist()

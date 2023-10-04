@@ -8,9 +8,9 @@ int main()
 	try
 	{
 		Bureaucrat gunjoong("gunjoong", 1);
-		Form *s = new ShrubberyCreationForm("scf");
-		Form *r = new RobotomyRequestForm("rrf");
-		Form *p = new PresidentialPardonForm("ppf");
+		AForm *s = new ShrubberyCreationForm("scf");
+		AForm *r = new RobotomyRequestForm("rrf");
+		AForm *p = new PresidentialPardonForm("ppf");
 		gunjoong.signForm(*s);
 		gunjoong.executeForm(*s);
 		gunjoong.signForm(*r);

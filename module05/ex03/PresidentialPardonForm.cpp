@@ -1,12 +1,12 @@
 #include "PresidentialPardonForm.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string& target)
-	: Form("PresidentialPardonFrom", min_required_grade_to_sign, min_required_grade_to_exec)
+	: AForm("PresidentialPardonFrom", min_required_grade_to_sign, min_required_grade_to_exec)
 	, target_(target)
 	{}
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& p)
-	: Form(p.getName(), p.getSignable(), p.getExecutable())
+	: AForm(p.getName(), p.getSignable(), p.getExecutable())
 	, target_(p.target_)
 	{}
 
@@ -16,7 +16,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 {
 	if (this == &p)
 		return (*this);
-	dynamic_cast<Form&>(*this) = p;
+	dynamic_cast<AForm&>(*this) = p;
 	this->target_ = p.target_;
 	return (*this);
 }

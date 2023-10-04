@@ -4,7 +4,7 @@
 
 #include "AForm.hpp"
 
-class RobotomyRequestForm : public Form
+class RobotomyRequestForm : public AForm
 {
 	private:
 		static const int min_required_grade_to_sign = 72;
