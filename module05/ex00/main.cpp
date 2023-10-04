@@ -1,10 +1,5 @@
 #include "Bureaucrat.hpp"
 
-void checkLeak()
-{
-	system("leaks ex00");
-}
-
 int main()
 {
 	try
@@ -31,6 +26,5 @@ int main()
 	{
 		std::cout << e.what() << std::endl;
 	}
-	atexit(checkLeak);
 	return 0;
 }

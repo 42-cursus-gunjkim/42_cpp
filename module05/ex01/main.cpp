@@ -1,10 +1,6 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
-void check_leak() {
-	system("leaks ex00");
-}
-
 int main() {
 	try
 	{
