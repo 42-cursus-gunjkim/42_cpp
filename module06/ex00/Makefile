@@ -1,9 +1,12 @@
 CXX=c++
-CXXFLAGS=-std=c++98 -Wall -Wextra -Werror
+CXXFLAGS=-std=c++98 -g
 NAME=ex00
 
 SRCS = main.cpp 			\
-	   ScalarConverter.cpp	\
+	   CharConverter.cpp	\
+	   IntConverter.cpp		\
+	   FloatConverter.cpp	\
+	   DoubleConverter.cpp	\
 
 
 OBJS=$(SRCS:.cpp=.o)
