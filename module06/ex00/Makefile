@@ -7,6 +7,7 @@ SRCS = main.cpp 			\
 	   IntConverter.cpp		\
 	   FloatConverter.cpp	\
 	   DoubleConverter.cpp	\
+	   ScalarConverter.cpp	\
 
 
 OBJS=$(SRCS:.cpp=.o)
