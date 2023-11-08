@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <climits>
+#include <cmath>
 
 class IntConverter
 {
