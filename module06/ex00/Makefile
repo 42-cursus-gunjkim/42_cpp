@@ -1,5 +1,5 @@
 CXX=c++
-CXXFLAGS=-std=c++98 -g
+CXXFLAGS=-std=c++98 -Wall -Wextra -Werror
 NAME=ex00
 
 SRCS = main.cpp 			\
@@ -8,7 +8,6 @@ SRCS = main.cpp 			\
 	   FloatConverter.cpp	\
 	   DoubleConverter.cpp	\
 	   ScalarConverter.cpp	\
-
 
 OBJS=$(SRCS:.cpp=.o)
 

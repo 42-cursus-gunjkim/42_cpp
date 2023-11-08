@@ -7,8 +7,14 @@
 
 Base* generate(void)
 {
-	int random = rand() % 3;
-	std::cout << "random " << random << std::endl;
+	static unsigned long	seed = static_cast<unsigned long>(time(NULL));
+	const unsigned long		a = 1103515245UL;
+	const unsigned long		c = 12345UL;
+	const unsigned long		m = 1UL << 31;
+
+	seed = (a * seed + c) % m;
+	int random = seed % 3;
+	//std::cout << "random " << random << std::endl;
 
 	switch(random)
 	{
@@ -16,34 +22,30 @@ Base* generate(void)
 		{
 			A* a = new A();
 			return dynamic_cast<Base*>(a);
-			break;
 		}
 		case 1:
 		{
 			B* b = new B();
 			return dynamic_cast<Base*>(b);
-			break;
 		}
 		case 2:
 		{
 			C* c = new C();
 			return dynamic_cast<Base*>(c);
-			break;
 		}
 		default:
 			return (NULL);
-			break;
 	}
 }
 
 void identify(Base* p)
 {
 	if(dynamic_cast<A*>(p) != NULL)
-		std::cout << "Actual Type : A" << std::endl;
+		std::cout << "Actual Type : A, Address : " << p << std::endl;
 	else if(dynamic_cast<B*>(p) != NULL)
-		std::cout << "Actual Type : B" << std::endl;
+		std::cout << "Actual Type : B, Address : " << p << std::endl;
 	else if(dynamic_cast<C*>(p) != NULL)
-		std::cout << "Actual Type : C" << std::endl;
+		std::cout << "Actual Type : C, Address : " << p << std::endl;
 	else
 		std::cout << "Unknown type" << std::endl;
 }
@@ -53,21 +55,21 @@ void identify(Base& p)
 	try
 	{
 		A& a = dynamic_cast<A&>(p);
-		std::cout << "Actual Type : A" << std::endl;
+		std::cout << "Actual Type : A, Address : " << &a <<  std::endl;
 	}
 	catch(const std::exception& e)
 	{
 		try
 		{
 			B& b = dynamic_cast<B&>(p);
-			std::cout << "Actual Type : B" << std::endl;
+			std::cout << "Actual Type : B, Address : " << &b << std::endl;
 		}
 		catch(const std::exception& e)
 		{
 			try
 			{
 				C& c = dynamic_cast<C&>(p);
-				std::cout << "Actual Type : C" << std::endl;
+				std::cout << "Actual Type : C, Address : " << &c << std::endl;
 			}
 			catch(const std::exception& e)
 			{
@@ -75,14 +77,11 @@ void identify(Base& p)
 			}
 			
 		}
-		
 	}
-	
 }
 
 int main()
 {
-	srand(time(NULL));
 	for (int i = 0; i < 5; i++)
 	{
 		Base* b = generate();
@@ -92,7 +91,9 @@ int main()
 
 	for (int i = 0; i < 5; i++)
 	{
-		Base& b = *generate();
+		Base* tmp = generate();
+		Base& b = *tmp;
 		identify(b);
+		delete tmp;
 	}
 }

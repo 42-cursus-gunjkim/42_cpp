@@ -4,6 +4,8 @@ bool ifCharThenConvert(const std::string& literal)
 {
 	if (literal.length() == 1 && literal[0] >= CHAR_MIN && literal[0] <= CHAR_MAX)
 	{
+		if (literal[0] >= '0' && literal[0] <= '9')
+			return false;
 		char c = literal[0];
 		CharConverter::convert(c);
 		IntConverter::convert(c);
@@ -47,7 +49,7 @@ bool ifFloatThenConvert(const std::string& literal)
 		f = 0/0.0f;
 	else 
 	{
-		int literalLen = literal.length();
+		size_t literalLen = literal.length();
 		if (literal.find('.') == std::string::npos
 		|| literal.find('f') != literalLen - 1)
 			return false;

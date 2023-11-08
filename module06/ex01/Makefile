@@ -1,5 +1,5 @@
 CXX=c++
-CXXFLAGS=-std=c++98 -g
+CXXFLAGS=-std=c++98 -Wall -Wextra -Werror
 NAME=ex01
 
 SRCS = main.cpp 		\

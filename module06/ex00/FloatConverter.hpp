@@ -12,8 +12,8 @@ public:
 	static void convert(double d);
 
 private:
-	FloatConverter() {}
-	//IntConverter(const IntConverter& ic) {};
-	//IntConverter& operator=(const IntConverter& ic) {};
-	~FloatConverter() {}
+	FloatConverter();
+	FloatConverter(const FloatConverter& other);
+	FloatConverter& operator=(const FloatConverter& other);
+	~FloatConverter();
 };

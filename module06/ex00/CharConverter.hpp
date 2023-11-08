@@ -12,8 +12,8 @@ public:
 	static void convert(double d);
 
 private:
-	CharConverter() {}
-	//CharConverter(const CharConverter& cc) {};
-	//CharConverter& operator=(const CharConverter& cc) {};
-	~CharConverter() {}
+	CharConverter();
+	CharConverter(const CharConverter& other);
+	CharConverter& operator=(const CharConverter& other);
+	~CharConverter();
 };
