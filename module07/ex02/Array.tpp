@@ -63,11 +63,11 @@ T& Array<T>::operator[](const unsigned int n)
 
 template <typename T>
 const T& Array<T>::operator[](const unsigned int n) const
-	{
-		if (n >= mSize)
-			throw std::exception();
-		return mData[n];
-	}
+{
+	if (n >= mSize)
+		throw std::exception();
+	return mData[n];
+}
 
 template <typename T>
 unsigned int Array<T>::size() const
