@@ -8,7 +8,7 @@ int main() {
 	std::cout << "Printing integers: ";
 	iter(intArray, intArrayLength, printElement<int>);
 	iter(intArray, intArrayLength, multipleTwice<int>);
-	std::cout << "\n";
+	std::cout << "\n" << "x2: ";
 	iter(intArray, intArrayLength, printElement<int>);
 	std::cout << std::endl;
 
@@ -18,7 +18,7 @@ int main() {
 	std::cout << "Printing doubles: ";
 	iter(doubleArray, doubleArrayLength, printElement<double>);
 	iter(doubleArray, doubleArrayLength, multipleTwice<double>);
-	std::cout << "\n";
+	std::cout << "\n" << "x2: ";
 	iter(doubleArray, doubleArrayLength, printElement<double>);
 	std::cout << std::endl;
 

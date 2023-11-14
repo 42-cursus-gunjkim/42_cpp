@@ -8,15 +8,32 @@ int main()
 	intArr[1] = 2;
 	intArr[2] = 3;
 	
-	for (int i = 0; i < intArr.size(); i++)
+	std::cout << "intArr" << std::endl;
+	for (unsigned int i = 0; i < intArr.size(); i++)
 		std::cout << intArr[i] << std::endl;
+	
+	Array<int> emptyArr;
+	try
+	{
+		std::cout << "empty array's size : " << emptyArr.size() << std::endl;
+		emptyArr[0] = 1;
+	}
+ 	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
+	emptyArr = intArr;
+	std::cout << "emptyArr" << std::endl;
+	for (unsigned int i = 0; i < emptyArr.size(); i++)
+		std::cout << emptyArr[i] << std::endl;
 
 	try
 	{
-		int a = intArr[-1];
+		int a = intArr[intArr.size()];
 		std::cout << a << std::endl;
 	}
-	catch (std::exception& e)
+	catch (const std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 	}
@@ -26,6 +43,8 @@ int main()
 	strArr[1] = "Who are you?";
 	strArr[2] = "What is your name?";
 
-	for (int i = 0; i < strArr.size(); i++)
+	for (unsigned int i = 0; i < strArr.size(); i++)
 		std::cout << strArr[i] << std::endl;
+
+	return 0;
 }
