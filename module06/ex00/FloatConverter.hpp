@@ -2,12 +2,13 @@
 
 #include <iostream>
 #include <climits>
+#include <iomanip>
 
 class FloatConverter
 {
 public:
 	static void convert(char c);
-	static void convert(int i);
+	static void convert(long l);
 	static void convert(float f);
 	static void convert(double d);
 

@@ -17,8 +17,8 @@ void DoubleConverter::convert(char c)
 	std::cout << std::fixed << "double: " << d << "\n";
 }
 
-void DoubleConverter::convert(int i)
+void DoubleConverter::convert(long l)
 {
-	double d = static_cast<double>(i);
+	double d = static_cast<double>(l);
 	std::cout << std::fixed << "double: " << d << "\n";
 }

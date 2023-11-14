@@ -8,13 +8,13 @@ void CharConverter::convert(char c)
 		std::cout << "char: " << c << "\n";
 }
 
-void CharConverter::convert(int i)
+void CharConverter::convert(long l)
 {
-	if (i < CHAR_MIN || i > CHAR_MAX)
+	if (l < CHAR_MIN || l > CHAR_MAX)
 		std::cout << "char: Overflow\n";
 	else
 	{
-		char c = static_cast<char>(i);
+		char c = static_cast<char>(l);
 		CharConverter::convert(c);
 	}
 }

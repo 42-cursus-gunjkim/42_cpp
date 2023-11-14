@@ -19,17 +19,17 @@ bool ifCharThenConvert(const std::string& literal)
 bool ifIntThenConvert(const std::string& literal)
 {
 	std::stringstream ss;
-	int i;
+	long l;
 	ss.str(literal);
 	if (literal.find('.') == std::string::npos)
 	{
-		ss >> i;
+		ss >> l;
 		if (ss.fail() == false && ss.tellg() == -1)
 		{
-			CharConverter::convert(i);
-			IntConverter::convert(i);
-			FloatConverter::convert(i);
-			DoubleConverter::convert(i);
+			CharConverter::convert(l);
+			IntConverter::convert(l);
+			FloatConverter::convert(l);
+			DoubleConverter::convert(l);
 			return true;
 		}
 	}
@@ -75,9 +75,10 @@ bool ifDoubleThenConvert(const std::string& literal)
 		d = INFINITY;
 	else if (literal == "-inf")
 		d = -INFINITY;
+	else if (literal == "inf")
+		return false;
 	else if (literal == "nan")
 		d = 0/0.0f;
-	else 
 	{
 		ss >> d;
 		if (ss.fail() != false || ss.tellg() != -1)

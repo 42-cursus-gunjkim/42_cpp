@@ -1,14 +1,20 @@
 #include "IntConverter.hpp"
 
-void IntConverter::convert(int i)
+void IntConverter::convert(long l)
 {
-	std::cout << "int: " << i << "\n";
+	if (l < INT_MIN || l > INT_MAX)
+		std::cout << "int: Overflow\n";
+	else
+	{
+		int i = static_cast<int>(l);
+		std::cout << "int: " << i << "\n";
+	}
 }
 
 void IntConverter::convert(char c)
 {
-	int i = static_cast<int>(c);
-	IntConverter::convert(i);
+	long l = static_cast<long>(c);
+	IntConverter::convert(l);
 }
 
 void IntConverter::convert(float f)
