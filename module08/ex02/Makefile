@@ -1,10 +1,8 @@
 CXX=c++
 CXXFLAGS=-g -std=c++98 -Wall -Wextra -Werror
-NAME=ex01
+NAME=ex02
 
 SRCS = main.cpp	\
-	   Span.cpp	\
-
 
 OBJS=$(SRCS:.cpp=.o)
 
