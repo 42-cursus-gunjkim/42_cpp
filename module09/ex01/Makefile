@@ -1,7 +1,8 @@
 CXX=c++
 CXXFLAGS=-std=c++98 -Wall -Wextra -Werror
-NAME=ex01
+NAME=RPN
 SRCS = main.cpp	\
+	   RPN.cpp	\
 
 OBJS=$(SRCS:.cpp=.o)
 
