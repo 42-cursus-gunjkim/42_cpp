@@ -44,4 +44,19 @@ public:
 	{
 		return this->c.crend();
 	}
+
+public:
+	MutantStack() {}
+	~MutantStack() {}
+	MutantStack(const MutantStack& other)
+	{
+		std::stack<T, Container>::operator=(other);
+	}
+	MutantStack& operator=(const MutantStack& other)
+	{
+		if (this == &other)
+			return *this;
+		std::stack<T, Container>::operator=(other);
+		return *this;
+	}
 };

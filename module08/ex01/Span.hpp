@@ -28,15 +28,29 @@ public:
 	int longestSpan() const;
 
 	template <typename iterator>
-	void addRange(iterator begin, iterator end)
+	void addRange(const iterator& begin, const iterator& end)
 	{
 		if (end - begin > mCapacity - mSize)
-			throw std::runtime_error("Span::Full!");
+			throw std::runtime_error("Error: Too many inputs");
 		for (iterator iter = begin; iter != end; iter++)
 		{
 			mData[mSize] = *iter;
 			mSize++;
 		}
+	}
+
+	template <typename iterator>
+	void addRange(std::size_t pos, const iterator& begin, const iterator& end)
+	{
+		if (pos + end - begin > mCapacity)
+			throw std::runtime_error("Error: Too many inputs");
+		for (iterator iter = begin; iter != end; iter++)
+		{
+			mData[pos] = *iter;
+			pos++;
+		}
+		if (pos + 1 > mSize)
+			mSize = pos + 1;
 	}
 
 private:

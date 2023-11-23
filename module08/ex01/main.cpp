@@ -1,5 +1,7 @@
-#include "Span.hpp"
 #include <iostream>
+#include <ctime>
+#include "Span.hpp"
+
 
 int main()
 {
@@ -10,11 +12,39 @@ int main()
 	test[2] = 17;
 	test[3] = 9;
 	test[4] = 11;
-	Span sp = Span(6);
+	Span sp = Span(10);
 	sp.addNumber(1);
-	sp.addRange(test.begin(), test.end());
+	sp.addNumber(2);
+	sp.addNumber(3);
+	try
+	{
+		sp.addRange(test.begin(), test.end());
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
+	std::cout << sp << std::endl;
+	try
+	{
+		sp.addRange(5, test.begin(), test.end());
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	std::cout << sp << std::endl;
 	std::cout << sp.shortestSpan() << std::endl;
 	std::cout << sp.longestSpan() << std::endl;
-	std::cout << sp << std::endl;
+
+	Span sp2 = Span(10000);
+	srand(time(NULL));
+
+	for (int i = 0; i < 10000; i++)
+		sp2.addNumber(rand() % 1000);
+	std::cout << sp2.shortestSpan() << std::endl;
+	std::cout << sp2.longestSpan() << std::endl;
+	//std::cout << sp2 << std::endl;
 	return 0;
 }
