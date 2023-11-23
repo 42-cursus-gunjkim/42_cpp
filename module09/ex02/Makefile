@@ -1,7 +1,8 @@
 CXX=c++
 CXXFLAGS=-std=c++98 -Wall -Wextra -Werror
-NAME=ex02
-SRCS = main.cpp	\
+NAME=PmergeMe
+SRCS = main.cpp		\
+	   PmergeMe.cpp	\
 
 OBJS=$(SRCS:.cpp=.o)
 
