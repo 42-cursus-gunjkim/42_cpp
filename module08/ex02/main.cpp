@@ -21,22 +21,22 @@ int main()
 
 	MutantStack<int>::const_iterator c_iter = stack.cbegin();
 	std::cout << *c_iter << std::endl;
-	// *c_iter = 3;
+	//*c_iter = 3;
 
 	MutantStack<int>::const_reverse_iterator cr_iter = stack.crbegin();
 	std::cout << *cr_iter << std::endl;
 	// *cr_iter = 3;
 
-	// MutantStack<int> test(stack);
-	// for (MutantStack<int>::iterator iter = test.begin(); iter != test.end(); iter++)
-	// {
-	// 	std::cout << *iter << std::endl;
-	// }
+	MutantStack<int> test(stack);
+	for (MutantStack<int>::iterator iter = test.begin(); iter != test.end(); iter++)
+	{
+		std::cout << *iter << std::endl;
+	}
 
-	// stack = test;
-	// MutantStack<int> test2(stack);
-	// for (MutantStack<int>::iterator iter = test2.begin(); iter != test2.end(); iter++)
-	// {
-	// 	std::cout << *iter << std::endl;
-	// }
+	stack = test;
+	MutantStack<int> test2(stack);
+	for (MutantStack<int>::iterator iter = test2.begin(); iter != test2.end(); iter++)
+	{
+		std::cout << *iter << std::endl;
+	}
 }

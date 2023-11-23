@@ -49,8 +49,8 @@ public:
 			mData[pos] = *iter;
 			pos++;
 		}
-		if (pos + 1 > mSize)
-			mSize = pos + 1;
+		if (pos > mSize)
+			mSize = pos;
 	}
 
 private:
