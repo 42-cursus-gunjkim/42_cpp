@@ -9,11 +9,10 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	RPN rpn;
-	Pair<int, int> ret = rpn.Calculate(argv[1]);
+	Pair<int, int> ret = RPN::Calculate(argv[1]);
 	int err_code = ret.Second();
 	int result = ret.First();
-	
+
 	if (err_code == 1)
 		std::cout << "Error" << std::endl;
 	else

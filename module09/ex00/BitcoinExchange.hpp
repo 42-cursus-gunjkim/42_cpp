@@ -19,16 +19,14 @@ public:
 	~BitcoinExchange();
 	void Exchange();
 
-	//debug
-	void PrintDB();
-
 public:
 	class FileException : public std::exception
 	{
 	private:
-		const char* m_err_msg;
+		std::string m_err_msg;
 	public:
-		FileException(const char* err_msg);
+		FileException(const std::string& err_msg);
+		 ~FileException() throw() {}
 		const char* what() const throw();
 	};
 

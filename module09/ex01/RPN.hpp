@@ -4,17 +4,17 @@
 #include <string>
 #include "Pair.hpp"
 
+# define CAL_SUCCESS 0
+# define CAL_FAILURE 1
+
 class RPN
 {
 public:
-	RPN() {}
-	~RPN();
-	Pair<int, int> Calculate(const std::string& expr);
+	static Pair<int, int> Calculate(const std::string& expr);
 
 private:
+	RPN();
+	~RPN();
 	RPN(const RPN& other);
 	RPN& operator=(const RPN& other);
-
-private:
-	std::stack<int> m_stack;
 };

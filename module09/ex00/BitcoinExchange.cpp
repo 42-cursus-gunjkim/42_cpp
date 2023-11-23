@@ -1,5 +1,23 @@
 #include "BitcoinExchange.hpp"
 
+template <typename T>
+std::string toString(T value) {
+    std::ostringstream os;
+    os << value;
+    return os.str();
+}
+
+bool isWhiteLine(const std::string& str) {
+    for (std::size_t i = 0; i < str.length(); i++)
+	{
+        if (!std::isspace(str[i]))
+		{
+            return false;
+        }
+    }
+    return true;
+}
+
 bool isValidDate(const std::string& date)
 {
 	std::size_t pos = date.find('-', 0);
@@ -85,10 +103,14 @@ bool splitDateValue(const std::string& line, std::string& date_out, double& valu
 	date_out = line.substr(0, pos);
 	date_out.erase(date_out.find_last_not_of(" \t\n\r\f\v") + 1);
 	std::getline(converter >> std::ws, garbage, separator);
-	if (converter.fail() || isValidDate(date_out) == false)
+	if (converter.fail())
 		return false;
 	converter >> value_out;
 	if (converter.fail())
+		return false;
+	std::string last;
+	converter >> last;
+	if (last != "")
 		return false;
 	return true;
 }
@@ -101,7 +123,7 @@ void BitcoinExchange::initExchanger(const std::string& input_file, const std::st
 	m_input_reader.open(input_file.c_str());
 	if (m_input_reader.fail() == true)
 		throw FileException("Input file open fail...");
-	
+
 	std::string line;
 	std::getline(db_reader, line);
 	if (line != "date,exchange_rate")
@@ -110,15 +132,22 @@ void BitcoinExchange::initExchanger(const std::string& input_file, const std::st
 	if (line != "date | value")
 		throw FileException("Wrong header in input file");
 
-	std::getline(db_reader, line);
 	std::string date;
 	double value;
+	std::getline(db_reader, line);
+	int index = 2;
 	while (db_reader.fail() == false)
 	{
-		if (splitDateValue(line, date, value, ',') == false)
-			throw FileException("Wrong file format");
+		if (isWhiteLine(line) == true)
+		{
+			getline(db_reader, line);
+			continue;
+		}
+		if (splitDateValue(line, date, value, ',') == false || isValidDate(date) == false)
+			throw FileException("Wrong file format, line at : " + toString(index));
 		m_db.insert(std::pair<std::string, double>(date, value));
 		std::getline(db_reader, line);
+		index++;
 	}
 	db_reader.close();
 }
@@ -147,42 +176,38 @@ void BitcoinExchange::Exchange()
 	getline(m_input_reader, line);
 	while (m_input_reader.fail() == false)
 	{
-		// refactoring 필요
+		if (isWhiteLine(line) == true)
+		{
+			getline(m_input_reader, line);
+			continue;
+		}
 		if (splitDateValue(line, date, value, '|') == false)
-			std::cout << "Error: bad input => " << date << "\n";
-		else if (date < m_db.begin()->first)
-			std::cout << "Error: bad input => " << date << "\n"; 
+			std::cout << "Error: Invalid Format\n";
+		else if (date < m_db.begin()->first || isValidDate(date) == false)
+			std::cout << "Error: bad date => " << date << "\n"; 
 		else if (value <= 0 || value >= 1000)
-			std::cout << "Error: invalid value => " << value << "\n";
+			std::cout << "Error: bad value (0, 1000) => " << value << "\n";
 		else
 		{
 			std::map<std::string, double>::iterator it = m_db.find(date);
 			if (it == m_db.end())
 			{
 				it = m_db.lower_bound(date);
-				it = it--;
+				it--;
 			}
-			std::cout << date << " => " << value << " = " << it->second * value << std::endl;
+			std::cout << std::fixed << std::setprecision(2) 
+			<< date << " => " << value << " = " << it->second * value << std::endl;
 		}
 		getline(m_input_reader, line);
 	}
 }
 
-void BitcoinExchange::PrintDB()
-{
-	for (auto iter = m_db.begin(); iter != m_db.end(); iter++)
-	{
-		std::cout << "(" << iter->first << " , " << iter->second << " )\n";
-	}
-	std::cout << "\n";
-}
-
-BitcoinExchange::FileException::FileException(const char* err_msg)
+BitcoinExchange::FileException::FileException(const std::string& err_msg)
 {
 	m_err_msg = err_msg;
 }
 
 const char* BitcoinExchange::FileException::what() const throw()
 {
-	return m_err_msg;
+	return m_err_msg.c_str();
 }
